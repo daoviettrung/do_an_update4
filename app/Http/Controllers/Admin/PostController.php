@@ -25,8 +25,8 @@ class PostController extends Controller
     public function getCategory($topic_id)
     {
         $categories = Category::where('topic_id', '=', $topic_id)->get();
+        echo "<option value=" . 'all' . ">   </option>";
         foreach ($categories as $category) {
-            echo "<option value=" . 'all' . ">All</option>";
             echo "<option value=" . $category->id . ">" . $category->name . "</option>";
         }
     }
