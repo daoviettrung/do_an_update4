@@ -13,7 +13,18 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="admin/ManagePost/ListPost"><i class="fa fa-dashboard fa-fw"></i> Manage post</a>
+                <a href="admin/Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Manage post</a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/ManagePost/ListPost">View post</a>
+                    </li>
+                    <li>
+                        <a href="#">Add post</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage Topic<span class="fa arrow"></span></a>
@@ -45,9 +56,6 @@
                     <li>
                         <a href="admin/ManageUser/view">View user</a>
                     </li>
-                    <li>
-                        <a href="admin/ManageUser/getAdd">Add User</a>
-                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -56,6 +64,18 @@
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/ManageReport/view">View report</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i  class="fa fa-user fa-fw"></i> Account<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/account/profile">Update profile</a>
+                    </li>
+                    <li>
+                        <a href="admin/account/security">Security</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

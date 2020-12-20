@@ -49,11 +49,9 @@ class TopicController extends Controller{
             }
             $nameCut=implode("",$nameCut);
             $nameCut=strtoupper($nameCut)."-1";
-            $slug=implode("-",$name);
-
             $topic->id=$nameCut;
             $topic->name=$request->name;
-            $topic->slug=$slug;
+            $topic->slug=$request->slug;
             $topic->mod_id=$m->id;
             $topic->save();
             session()->flash('success', 'Created successfully');
@@ -81,10 +79,10 @@ class TopicController extends Controller{
             return $this->getAddTopic() ;
         }
     }
-    public function delete($slug){
+    public function delete($id){
         $id_cate=[];
         $i=0;
-        $idT=DB::table('tbl_topic')->where('slug',$slug)->get();
+        $idT=DB::table('tbl_topic')->where('id',$id)->get();
         foreach ($idT as $t){
             $t=$t;
         }
@@ -106,19 +104,17 @@ class TopicController extends Controller{
         $topic->delete();
         return $this->viewTopic();
     }
-    public function getEdit($slug){
-        $user=User::all();
+    public function getEdit($id){
+        $user=User::select('users.*')->where('level','=',1)->get();
 
-        $idT=DB::table('tbl_topic')->where('slug',$slug)->get();
+        $idT=DB::table('tbl_topic')->where('id',$id)->get();
         foreach ($idT as $t){
             $t=$t;
         }
         return view('dashboard.pages.admin.topic.Edit',['topic'=>$t,'user'=>$user]);
     }
-    public function postEdit(Request $request,$slug){
-        $validator= $request->validate(['name'=>'required|min:2|max:250'],['name.required'=>'Do not leave it blank',
-            'name.min'=>'Need to enter 2 or more characters','name.max'=>'The number of characters exceeds the limit']);
-        $idT=DB::table('tbl_topic')->where('slug',$slug)->get();
+    public function postEdit(Request $request,$id){
+        $idT=DB::table('tbl_topic')->where('id',$id)->get();
         foreach ($idT as $t){
             $t=$t;
         }
@@ -128,10 +124,9 @@ class TopicController extends Controller{
         }
         $name=$request->name;
         $name= explode(" ",$name);
-        $slug=implode("-",$name);
-        $topic=Topic::find($t->id);
+        $topic=Topic::find($id);
         $topic->name=$request->name;
-        $topic->slug=$slug;
+        $topic->slug=$request->slug;
         $topic->mod_id=$m->id;
         $topic->save();
         session()->flash('success', 'Edit successfully');

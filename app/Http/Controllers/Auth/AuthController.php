@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -16,9 +17,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
     public function checkLogin(Request $request){
-        $admin= new PostController();
-        $client= new ClientController();
-        $mod= new ModControllers();
+        $admin= new RedirectController();
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $credentials = DB::table('users')->where('email', $request->email)->get();
@@ -26,7 +25,7 @@ class AuthController extends Controller
                 $values=$values;
 
             }
-            return $admin->showPost($values->id);
+            return $admin->getAdminDashboard();
         }
         else{
             return view('auth.login');

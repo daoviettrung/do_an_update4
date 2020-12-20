@@ -73,7 +73,6 @@
                                                     <label>Select Topic</label>
                                                     <select class="form-control" id="topic_id" name="topic"
                                                             onchange="getCategory();">
-                                                        <option value="NULL">       </option>
                                                         @foreach($topic as $t)
                                                             <option value="{{$t->id}}">{{$t->name}}</option>
                                                         @endforeach
@@ -82,16 +81,6 @@
                                                 <div class="form-group">
                                                     <label>Select Category</label>
                                                     <select class="form-control" id="category_id" name="category">
-                                                        echo "<option value=" . 'NULL' . ">null</option>";
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Select poster</label>
-                                                    <select class="form-control" id="poster_id" name="poster">
-                                                        <option value="NULL">      </option>
-                                                        @foreach($user as $u)
-                                                            <option value="{{$u->id}}">{{$u->name}}</option>
-                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <button type="submit" class="btn btn-default">Submit</button>
@@ -112,7 +101,6 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($post as $p)
-                                                        @if($p->is_post==1)
                                                         <tr>
                                                             <td>{{$p->author->name}}</td>
                                                             <td>{{$p->category->name}}</td>
@@ -126,7 +114,6 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                        @endif
                                                     @endforeach
                                                     </tbody>
                                                 </table>

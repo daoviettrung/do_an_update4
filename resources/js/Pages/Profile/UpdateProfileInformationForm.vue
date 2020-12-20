@@ -112,7 +112,7 @@
                     this.form.photo = this.$refs.photo.files[0]
                 }
 
-                this.form.post(route('user-profile-information.update'), {
+                this.form.post(route('user-account-information.update'), {
                     preserveScroll: true
                 });
             },

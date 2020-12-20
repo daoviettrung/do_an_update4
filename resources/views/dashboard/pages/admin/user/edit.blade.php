@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Edit User</h1>
+                    <h1 class="page-header">Update User</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -57,7 +57,7 @@
                     @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form Edit User
+                            Form Update User
                         </div>
                         <div class="panel-body">
                             <form style="width: 500px" role="form" method="post" action="admin/ManageUser/postEdit/{{$user->id}}">
@@ -67,12 +67,12 @@
                                         <div class="form-group">
                                             <label>Name</label>
                                             <input style="width: 300px" class="form-control" id="title" onkeyup="ChangeToSlug();"
-                                                   name="name" placeholder="{{$user->name}}" value="" required>
+                                                   name="name"  value="{{$user->name}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input style="width: 300px" class="form-control" id="title" onkeyup="ChangeToSlug();"
-                                                   name="email" placeholder="{{$user->email}}" value="" required>
+                                                   name="email" value="{{$user->email}}" required>
                                         </div>
 
                                     </div>
@@ -102,14 +102,9 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label style="margin-left: 15px">Password</label>
-                                        <input style="width: 200px;margin-left: 15px" class="form-control" id="title" onkeyup="ChangeToSlug();"
-                                               name="password" value="" required>
-                                    </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <button type="submit" class="btn btn-default">Edit
+                                <button type="submit" class="btn btn-default">Update
                                 </button>
 
                             </form>

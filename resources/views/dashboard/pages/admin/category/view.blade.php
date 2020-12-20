@@ -67,7 +67,7 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Topic</th>
-                                                        <th>Edit</th>
+                                                        <th>Update</th>
                                                         <th>Delete</th>
                                                     </tr>
                                                     </thead>
@@ -77,7 +77,7 @@
                                                             <td>{{$c->name}}</td>
                                                             <td>{{$c->topic->name}}</td>
                                                             <td>
-                                                                <a href="admin/ManageCategory/getEdit/{{$c->slug}}">
+                                                                <a href="admin/ManageCategory/getEdit/{{$c->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
@@ -85,7 +85,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <form method="post" action="admin/ManageCategory/delete/{{$c->slug}}">
+                                                                <form method="post" action="admin/ManageCategory/delete/{{$c->id}}">
                                                                     @csrf
                                                                     <button type="submit"
                                                                             class="btn btn-danger btn-circle"

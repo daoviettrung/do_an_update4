@@ -8,11 +8,11 @@ class MemberController extends Controller{
     public function showProfile($id=null)
     {
         $id = User::find($id);
-        return view('dashboard.pages.member.profile.ShowProfile', ['accountLogin' => $id]);
+        return view('dashboard.pages.member.account.ShowProfile', ['accountLogin' => $id]);
     }
     public function getEditprofile($id){
         $user= User::find($id);
-        return view('dashboard.pages.member.profile.EditProfile',['user'=>$user,'accountLogin'=>$user]);
+        return view('dashboard.pages.member.account.EditProfile',['user'=>$user,'accountLogin'=>$user]);
     }
 
     public function postEditProfile(Request $request,$id){
@@ -27,7 +27,7 @@ class MemberController extends Controller{
     }
     public function getEditPassword($id){
         $user=User::find($id);
-        return view('dashboard.pages.member.profile.EditPassword',['accountLogin'=>$user]);
+        return view('dashboard.pages.member.account.EditPassword',['accountLogin'=>$user]);
     }
     public function postEditPassword(Request $request,$id){
         $user=User::find($id);

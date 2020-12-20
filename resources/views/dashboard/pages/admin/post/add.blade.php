@@ -24,12 +24,11 @@
     <![endif]-->
 
     <!-- jquery -->
-    <script>
-        import Button from "../../../../../js/Jetstream/Button";
-        export default {
-            components: {Button}
-        }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Tiny -->
+    <script src="https://cdn.tiny.cloud/1/hdeyuuwa87xv4l8rh9se9bd7ze213rdiibh73cg19yqswf8j/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
 @endsection
 
 @section('content')
@@ -37,13 +36,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Category</h1>
+                    <h1 class="page-header">Create Post</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div style="width: 800px" class="col-lg-12">
+                <div class="col-lg-12">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -54,51 +53,55 @@
                             </ul>
                         </div>
                     @endif
-                        @if(session()->has('success'))
-                            <div class="alert alert-success">
-                                {{ session()->get('success') }}
-                            </div>
-                        @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form update Category
+                            Form Create Post
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManageCategory/postEdit/{{$cate->slug}}">
+                            <form role="form" method="post" action="member/post/add">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-9">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input style="width: 300px" class="form-control" id="name" onkeyup="ChangeToSlug();"
-                                                   name="name" value="{{$cate->name}}" required>
+                                            <label>Title</label>
+                                            <input class="form-control" id="title" onkeyup="ChangeToSlug();"
+                                                   name="title" value="{{ old('title') }}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Content</label>
+                                            <textarea name="_content">{{ old('_content') }}</textarea>
                                         </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Select Topic id</label>
-
-                                            <select class="form-control" id="topic_id" name="topic_id">
-                                                @foreach($topic as $t)
-                                                    <option>{{$t->name}}</option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Slug</label>
-                                            <input style="width: 300px" class="form-control" class="form-control" id="slug" name="slug" value="{{$cate->slug}}"
+                                            <input class="form-control" id="slug" name="slug" value="{{ old('slug') }}"
                                                    required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Topic</label>
+                                            <select class="form-control" id="topic_id" name="topic_id"
+                                                    onchange="getCategory();">
+                                                @foreach($topics as $topic)
+                                                    <option value="{{$topic->id}}">{{$topic->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Category</label>
+                                            <select class="form-control" id="category_id" name="category_id">
+                                            </select>
                                         </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <button type="submit" class="btn btn-default">Update
-                                </button>
-
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-default">Create</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
                             </form>
                             <!-- /.row (nested) -->
                         </div>
@@ -127,15 +130,27 @@
     <!-- Custom Theme JavaScript -->
     <script src="assets_dashboard/js/startmin.js"></script>
 
-    <!-- ckeditor5 -->
-    <script src="ckeditor5/build/ckeditor.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker autoresize',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
+
     <script>
         function ChangeToSlug() {
-            var name, slug;
+            var title, slug;
+
             //Lấy text từ thẻ input title
-            name = document.getElementById("name").value;
+            title = document.getElementById("title").value;
+
             //Đổi chữ hoa thành chữ thường
-            slug = name.toLowerCase();
+            slug = title.toLowerCase();
+
             //Đổi ký tự có dấu thành không dấu
             slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
             slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
@@ -160,5 +175,27 @@
             //In slug ra textbox có id “slug”
             document.getElementById('slug').value = slug;
         }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function getCategory() {
+            var topic_id = $("#topic_id").val();
+            $.ajax({
+                type: "get",
+                url: "ajax/getCategory/" + topic_id,
+                success: function (res) {
+                    $("#category_id").html(res);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            ChangeToSlug();
+            getCategory();
+        });
     </script>
 @endsection

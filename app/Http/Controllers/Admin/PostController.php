@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function showPost()
     {
-        $post = Post::all();
+        $post = Post::select('tbl_post.*')->where('is_post','=',1)->get();
         $topic = Topic::all();
         $user = User::all();
         $cate = Category::all();
@@ -39,7 +39,7 @@ class PostController extends Controller
          var_dump($request->poster);
          var_dump($request->category);*/
 
-        if ($request->topic != 'NULL' && $request->category == 'all' && $request->poster == 'NULL') {
+        if ($request->topic != 'NULL' && $request->category == 'all') {
             $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                 ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
                 ->where('tbl_topic.id', '=', $request->topic)
@@ -47,7 +47,7 @@ class PostController extends Controller
                 ->get();
             return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
                 'topic' => $topic, 'user' => $user]);
-        } elseif ($request->category != 'all' && $request->poster == 'NULL') {
+        } elseif ($request->category != 'all') {
             $posts = Post::leftjoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                 ->where('tbl_category.id', '=', $request->category)
                 ->select('tbl_post.*')
@@ -56,27 +56,71 @@ class PostController extends Controller
                 'topic' => $topic, 'user' => $user]);
             //Lấy post theo poster
 
-        } elseif ($request->poster != 'NULL' && $request->topic == 'NULL' && $request->category != 'all') {
-            $posts = Post::leftjoin('users', 'users.id', '=', 'tbl_post.author_id')
-                ->where('users.id', '=', $request->poster)
-                ->select('tbl_post.*')
-                ->get();
-            return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
-                'topic' => $topic, 'user' => $user]);
-        } //Lấy post theo chủng loại và user
-        elseif ($request->poster != 'NULL' && $request->topic != 'null') {
-            $posts = Post::select('tbl_post.*')
-                ->where('author_id', '=', $request->poster)
-                ->where('category_id', '=', $request->category)
-                ->get();
+        } elseif ($request->topic == 'NULL' && $request->category == 'all') {
+            $posts = Post::all();
             return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
                 'topic' => $topic, 'user' => $user]);
         }
-
     }
 
     public function viewPost($id)
     {
         echo $id;
+    }
+    function to_id($slug)
+    {
+        $arr = explode('-', $slug);
+        $id = "";
+        foreach ($arr as $v) {
+            $id .= substr($v, 0, 1);
+        }
+        return strtoupper($id);
+    }
+
+    public function getAddPost()
+    {
+        $topics = Topic::all();
+        return view('dashboard.pages.member.post.add', ['topics' => $topics]);
+    }
+
+    public function postAddPost(Request $request)
+    {
+        $request->validate([
+            'title' => 'max:255',
+            'slug' => 'unique:tbl_post|max:255',
+            '_content' => 'required',
+        ]);
+        $post = new Post();
+        $post->author_id = Auth::id();
+        $post->category_id = $request->category_id;
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post_latest = Post::where('is_post', '=', true)
+            ->latest()
+            ->first();
+        if ($post_latest) {
+            $index = (int)explode('-', $post_latest->id)[1] + 1;
+            $post_id = $this->to_id($post->slug) . '-' . $index;
+        } else {
+            $post_id = $this->to_id($post->slug) . '-1';
+        }
+        $post->id = $post_id;
+        $post->content = $request->_content;
+        if ($post->category->topic->mod_id == $post->author_id || Auth::user()->level == 2) {
+            $post->status = 'display';
+        } else {
+            $post->status = 'approval';
+        }
+        $post->is_post = true;
+        $post->save();
+        if (Auth::user()->level == 0) {
+            return redirect('member/post/list')
+                ->with('status', 'Post successfully created!');
+        } elseif (Auth::user()->level == 1) {
+            return redirect('mod/post/list')
+                ->with('status', 'Post successfully created!');
+        }
+        return redirect('admin/post/list')
+            ->with('status', 'Post successfully created!');
     }
 }

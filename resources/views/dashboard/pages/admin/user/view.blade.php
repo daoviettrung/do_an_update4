@@ -65,9 +65,9 @@
                                                         <th>Email</th>
                                                         <th>Gender</th>
                                                         <th>Level</th>
+                                                        <th>Number of posts</th>
                                                         <th>Created_at</th>
-                                                        <th>Edit</th>
-                                                        <th>Delete</th>
+                                                        <th>Action</th>
                                                     </tr>
 
                                                     </thead>
@@ -77,17 +77,33 @@
                                                             <td>{{$u->name}}</td>
                                                             <td>{{$u->email}}</td>
                                                             <td>{{$u->gender}}</td>
-                                                            <td>{{$u->level}}</td>
-                                                            <td>{{$u->created_at}}</td>
+                                                            @if($u->level==0)
+                                                            <td>Member</td>
+                                                            @endif
+                                                            @if($u->level==1)
+                                                                <td>Mod</td>
+                                                            @endif
+                                                            @if($u->level==2)
+                                                                <td>Admin</td>
+                                                            @endif
+                                                            <td>{{ App\Models\Post::where('author_id', $u->id)->count()}}</td>
                                                             <td>
+                                                                {{$u->created_at}}
+                                                            </td>
+                                                            <td>
+                                                                <a href="admin/ManageUser/ViewPost/{{$u->id}}">
+                                                                    <button type="button"
+                                                                            class="btn btn-success btn-circle">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </button>
+                                                                </a>
+                                                                @if($u->name!=Auth::user()->name&&$u->level!=2)
                                                                 <a href="admin/ManageUser/getEdit/{{$u->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                            </td>
-                                                            <td>
                                                                 <form method="post" action="admin/ManageUser/delete/{{$u->id}}">
                                                                     @csrf
                                                                     <button type="submit"
@@ -96,6 +112,7 @@
                                                                         <i class="fa fa-trash"></i>
                                                                     </button>
                                                                 </form>
+                                                                    @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -143,7 +160,7 @@
         $(document).ready(function () {
             $('#dataTables-example').DataTable({
                 responsive: true,
-                order: [[6, "desc"]]
+                order: [[4, "desc"]]
             });
         });
     </script>

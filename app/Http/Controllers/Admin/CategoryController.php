@@ -46,10 +46,9 @@ class CategoryController extends Controller
             }
             $nameCut = implode("", $nameCut);
             $nameCut = strtoupper($nameCut) . "-1";
-            $slug = implode("-", $name);
             $cate->id = $nameCut;
             $cate->name = $request->name;
-            $cate->slug = $slug;
+            $cate->slug = $request->slug;
             $cate->topic_id = $t->id;
             $cate->save();
             session()->flash('success', 'Created successfully');
@@ -76,8 +75,8 @@ class CategoryController extends Controller
             return view('dashboard.pages.admin.category.add', ['topic'=>$topic]);
         }
     }
-    public function delete($slug){
-        $idC=DB::table('tbl_category')->where('slug',$slug)->get();
+    public function delete($id){
+        $idC=DB::table('tbl_category')->where('id',$id)->get();
         foreach ($idC as $c){
             $c=$c;
         }
@@ -90,18 +89,16 @@ class CategoryController extends Controller
         $cate->delete();
         return $this->viewCate();
     }
-    public function getEdit($slug){
+    public function getEdit($id){
         $topic=Topic::all();
-        $idC=DB::table('tbl_category')->where('slug',$slug)->get();
+        $idC=DB::table('tbl_category')->where('id',$id)->get();
         foreach ($idC as $c){
             $c=$c;
         }
         return view('dashboard.pages.admin.category.edit',['cate'=>$c,'topic'=>$topic]);
     }
-    public function postEdit(Request $request,$slug){
-        $validator= $request->validate(['name'=>'required|min:2|max:250'],['name.required'=>'Do not leave it blank',
-            'name.min'=>'Need to enter 2 or more characters','name.max'=>'The number of characters exceeds the limit']);
-        $idC=DB::table('tbl_category')->where('slug',$slug)->get();
+    public function postEdit(Request $request,$id){
+        $idC=DB::table('tbl_category')->where('id',$id)->get();
         foreach ($idC as $c){
             $c=$c;
         }
@@ -111,10 +108,9 @@ class CategoryController extends Controller
         }
         $name=$request->name;
         $name= explode(" ",$name);
-        $slug=implode("-",$name);
         $cate=Category::find($c->id);
         $cate->name=$request->name;
-        $cate->slug=$slug;
+        $cate->slug=$request->slug;
         $cate->topic_id=$t->id;
         $cate->save();
         return $this->viewCate();

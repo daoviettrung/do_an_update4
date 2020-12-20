@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
 
 class RedirectController extends Controller
 {
@@ -20,8 +21,11 @@ class RedirectController extends Controller
         return redirect('/login');
     }
 
-    public function getMemberDashboard()
+    public function getAdminDashboard()
     {
-        return view('dashboard.pages.member.dashboard');
+        $count_all_post = Post::where('author_id', '=', Auth::id())
+                ->where('is_post', '=', 1)
+                ->count() ?? 0;
+        return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post]);
     }
 }
