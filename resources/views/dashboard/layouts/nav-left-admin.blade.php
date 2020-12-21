@@ -19,10 +19,10 @@
                 <a href="#"><i class="fa fa-dashboard fa-fw"></i> Manage post</a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManagePost/ListPost">View post</a>
+                        <a href="admin/ManagePost/list/my-post">View post</a>
                     </li>
                     <li>
-                        <a href="#">Add post</a>
+                        <a href="admin/ManagePost/add">Add post</a>
                     </li>
                 </ul>
             </li>

@@ -5,21 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Topic;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function showPost()
+    function to_id($slug)
     {
-        $post = Post::select('tbl_post.*')->where('is_post','=',1)->get();
-        $topic = Topic::all();
-        $user = User::all();
-        $cate = Category::all();
-        return view('dashboard.pages.admin.post.ViewPost', ['post' => $post,
-            'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+        $arr = explode('-', $slug);
+        $id = "";
+        foreach ($arr as $v) {
+            $id .= substr($v, 0, 1);
+        }
+        return strtoupper($id);
     }
 
     public function getCategory($topic_id)
@@ -35,54 +36,58 @@ class PostController extends Controller
     {
         $topic = Topic::all();
         $user = User::all();
-        /* var_dump($request->topic);
-         var_dump($request->poster);
-         var_dump($request->category);*/
-
         if ($request->topic != 'NULL' && $request->category == 'all') {
             $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                 ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
                 ->where('tbl_topic.id', '=', $request->topic)
                 ->select('tbl_post.*')
                 ->get();
-            return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
                 'topic' => $topic, 'user' => $user]);
         } elseif ($request->category != 'all') {
             $posts = Post::leftjoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                 ->where('tbl_category.id', '=', $request->category)
                 ->select('tbl_post.*')
                 ->get();
-            return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
                 'topic' => $topic, 'user' => $user]);
             //Lấy post theo poster
 
         } elseif ($request->topic == 'NULL' && $request->category == 'all') {
             $posts = Post::all();
-            return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
                 'topic' => $topic, 'user' => $user]);
         }
     }
 
-    public function viewPost($id)
+    public function getMyPost()
     {
-        echo $id;
-    }
-    function to_id($slug)
-    {
-        $arr = explode('-', $slug);
-        $id = "";
-        foreach ($arr as $v) {
-            $id .= substr($v, 0, 1);
-        }
-        return strtoupper($id);
+        $posts = Post::where('author_id', '=', Auth::id())
+            ->where('is_post', '=', true)
+            ->latest()
+            ->get();
+        return view('dashboard.pages.admin.post.my-post', ['posts' => $posts]);
     }
 
+    public function showPost()
+    {
+        $topicFirst=DB::table('tbl_topic')->first();
+        $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
+            ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
+            ->where('tbl_topic.id', '=', $topicFirst->id)
+            ->select('tbl_post.*')
+            ->get();
+        $topic = Topic::all();
+        $user = User::all();
+        $cate = Category::all();
+        return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+            'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+    }
     public function getAddPost()
     {
         $topics = Topic::all();
-        return view('dashboard.pages.member.post.add', ['topics' => $topics]);
+        return view('dashboard.pages.admin.post.add', ['topics' => $topics]);
     }
-
     public function postAddPost(Request $request)
     {
         $request->validate([
@@ -113,14 +118,9 @@ class PostController extends Controller
         }
         $post->is_post = true;
         $post->save();
-        if (Auth::user()->level == 0) {
-            return redirect('member/post/list')
-                ->with('status', 'Post successfully created!');
-        } elseif (Auth::user()->level == 1) {
-            return redirect('mod/post/list')
-                ->with('status', 'Post successfully created!');
-        }
-        return redirect('admin/post/list')
+        return redirect('admin/ManagePost/list/my-post')
             ->with('status', 'Post successfully created!');
     }
+
+
 }

@@ -58,7 +58,7 @@
                             Form Create Post
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="member/post/add">
+                            <form role="form" method="post" action="admin/ManagePost/add">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-9">
@@ -186,7 +186,7 @@
             var topic_id = $("#topic_id").val();
             $.ajax({
                 type: "get",
-                url: "ajax/getCategory/" + topic_id,
+                url: "admin/ManagePost/getCategory/" + topic_id,
                 success: function (res) {
                     $("#category_id").html(res);
                 }
