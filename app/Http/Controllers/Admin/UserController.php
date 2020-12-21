@@ -53,12 +53,7 @@ class UserController extends Controller{
         return $this->viewUser();
     }
     public function viewPost($id){
-        $posts=Post::select('tbl_post.*')->where('author_id','=',$id)->get();
-        $topic = Topic::all();
-        $user = User::all();
-        $cate = Category::all();
-        return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-            'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+
     }
     /* public function getAddUser()
  {

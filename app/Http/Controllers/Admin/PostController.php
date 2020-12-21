@@ -42,19 +42,32 @@ class PostController extends Controller
         return view('dashboard.pages.admin.post.my-post', ['posts' => $posts]);
     }
 
-    public function showPost()
+    public function showPost($id = null)
     {
-        $topicFirst = DB::table('tbl_topic')->first();
-        $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
-            ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
-            ->where('tbl_topic.id', '=', $topicFirst->id)
-            ->select('tbl_post.*')
-            ->get();
-        $topic = Topic::all();
-        $user = User::all();
-        $cate = Category::all();
-        return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-            'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+        if (isset($id)) {
+            $user = DB::table('users')->where('id', $id)->get();
+            foreach ($user as $u) {
+                $u = $u;
+            }
+            $posts = Post::select('tbl_post.*')->where('author_id', '=', $id)->get();
+            $topic = Topic::all();
+            $cate = Category::all();
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                'topic' => $topic, 'user' => $u, 'cate' => $cate]);
+        } else {
+            $topicFirst = DB::table('tbl_topic')->first();
+            $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
+                ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
+                ->where('tbl_topic.id', '=', $topicFirst->id)
+                ->select('tbl_post.*')
+                ->get();
+            $topic = Topic::all();
+            $user = User::all();
+            $cate = Category::all();
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+        }
+
     }
 
     public function getAddPost()
@@ -97,7 +110,7 @@ class PostController extends Controller
             ->with('status', 'Post successfully created!');
     }
 
-    public function filter(Request $request)
+    public function filter(Request $request, $id = null)
     {
         $topic = Topic::all();
         $user = User::all();
@@ -120,12 +133,16 @@ class PostController extends Controller
                 'topic' => $topic, 'user' => $user, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
             //Lấy post theo poster
 
-        } elseif ($request->topic == 'NULL' && $request->category == 'all') {
-            $posts = Post::all();
+        } elseif ($id != null && $request->category != all) {
+            $posts = Post::select('tbl_post.*')
+                ->where('author_id', '=', $id)
+                ->where('category_id', '=', $request->category)
+                ->get();
             return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
                 'topic' => $topic, 'user' => $user, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
         }
     }
+
     public function getEditPost(Request $request)
     {
         $topics = Topic::all();
@@ -146,6 +163,7 @@ class PostController extends Controller
                 'topics' => $topics
             ]);
     }
+
     public function postEditPost(Request $request)
     {
         $request->validate([
@@ -180,6 +198,7 @@ class PostController extends Controller
         }
         return back()->with('status', 'Edit successfully!');
     }
+
     public function postDeletePost(Request $request)
     {
         Post::where('id', 'like', $request->id . '%')

@@ -87,7 +87,7 @@
                                                                 <td>Admin</td>
                                                             @endif
                                                             <td>{{ App\Models\Post::where('author_id', $u->id)->count()}}
-                                                                <a href="admin/ManageUser/ViewPost/{{$u->id}}">
+                                                                <a href="admin/ManagePost/list/post-i-manage/{{$u->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>

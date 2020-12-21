@@ -82,7 +82,11 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <form class="form-inline" role="form" method="post"
-                                                  action="admin/ManagePost/list/post-i-manage">
+                                                  @if(isset($u))
+                                                  action="admin/ManagePost/list/post-i-manage/{{$user->id}}">
+                                                @else
+                                                    action="admin/ManagePost/list/post-i-manage">
+                                                @endif
                                                 @csrf
                                                 <div class="form-group">
                                                     <label>Select Topic</label>
