@@ -88,9 +88,20 @@
                                                     <label>Select Topic</label>
                                                     <select class="form-control" id="topic_id" name="topic"
                                                             onchange="getCategory();">
-                                                        @foreach($topic as $t)
-                                                            <option value="{{$t->id}}">{{$t->name}}</option>
-                                                        @endforeach
+                                                        @if(isset($topicC))
+                                                            @foreach($topic as $t)
+                                                                @if($topicC==$t->id)
+                                                                    <option value="{{$t->id}}"
+                                                                            selected>{{$t->name}}</option>
+                                                                @else
+                                                                    <option value="{{$t->id}}">{{$t->name}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            @foreach($topic as $t)
+                                                                <option value="{{$t->id}}">{{$t->name}}</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                                 <div class="form-group">

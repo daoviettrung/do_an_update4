@@ -37,14 +37,14 @@ Route::prefix('admin')->group(function(){
     Route::get('Dashboard',[RedirectController::class,'getAdminDashboard']);
     Route::prefix('ManagePost')->group(function (){
         Route::get('getCategory/{topic_id}',[PostController::class,'getCategory']);
-
-
-        //=============================================================
         Route::get('list/my-post', [PostController::class, 'getMyPost']);
         Route::get('list/post-i-manage', [PostController::class, 'showPost']);
         Route::post('list/post-i-manage', [PostController::class, 'filter']);
         Route::get('/add', [PostController::class, 'getAddPost']);
         Route::post('/add', [PostController::class, 'postAddPost']);
+        Route::get('/edit/{id}', [PostController::class, 'getEditPost']);
+        Route::post('/edit', [PostController::class, 'postEditPost']);
+        Route::post('/delete', [PostController::class, 'postDeletePost']);
         //Route::get('ListPost',[PostController::class,'showPost']);
         // Route::get('ViewPost/{id}',[PostController::class,'viewPost']);
         // Route::post('filter',[PostController::class,'filter']);

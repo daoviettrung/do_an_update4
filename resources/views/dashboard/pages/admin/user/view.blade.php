@@ -86,17 +86,18 @@
                                                             @if($u->level==2)
                                                                 <td>Admin</td>
                                                             @endif
-                                                            <td>{{ App\Models\Post::where('author_id', $u->id)->count()}}</td>
-                                                            <td>
-                                                                {{$u->created_at}}
-                                                            </td>
-                                                            <td>
+                                                            <td>{{ App\Models\Post::where('author_id', $u->id)->count()}}
                                                                 <a href="admin/ManageUser/ViewPost/{{$u->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>
                                                                     </button>
                                                                 </a>
+                                                            </td>
+                                                            <td>
+                                                                {{$u->created_at}}
+                                                            </td>
+                                                            <td>
                                                                 @if($u->name!=Auth::user()->name&&$u->level!=2)
                                                                 <a href="admin/ManageUser/getEdit/{{$u->id}}">
                                                                     <button type="button"

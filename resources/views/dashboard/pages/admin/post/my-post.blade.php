@@ -106,20 +106,20 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                <a href="mod/post/view/{{$post->id}}"
+                                                                <a href="admin/ManagePost/view/{{$post->id}}"
                                                                    target="_blank">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>
                                                                     </button>
                                                                 </a>
-                                                                <a href="mod/post/edit/{{$post->id}}">
+                                                                <a href="admin/ManagePost/edit/{{$post->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <form method="post" action="member/post/delete">
+                                                                <form method="post" action="admin/ManagePost/delete">
                                                                     @csrf
                                                                     <input name="id" value="{{$post->id}}"
                                                                            hidden>

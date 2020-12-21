@@ -57,7 +57,7 @@ class UserController extends Controller{
         $topic = Topic::all();
         $user = User::all();
         $cate = Category::all();
-        return view('dashboard.pages.admin.post.ViewPost', ['post' => $posts,
+        return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
             'topic' => $topic, 'user' => $user, 'cate' => $cate]);
     }
     /* public function getAddUser()
