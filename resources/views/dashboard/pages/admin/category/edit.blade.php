@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Category</h1>
+                    <h1 class="page-header">Edit Category</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -61,7 +61,7 @@
                         @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form update Category
+                            Form edit Category
                         </div>
                         <div class="panel-body">
                             <form role="form" method="post" action="admin/ManageCategory/postEdit/{{$cate->id}}">

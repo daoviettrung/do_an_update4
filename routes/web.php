@@ -75,6 +75,8 @@ Route::prefix('admin')->group(function(){
     Route::prefix('ManageReport')->group(function(){
         Route::get('view',[ReportController::class,'viewReport']);
         Route::get('ViewPost/{id}',[ReportController::class,'viewPost']);
+        Route::post('month',[ReportController::class,'getMonth']);
+
     });
     Route::prefix('/account')->group(function () {
         Route::get('/profile', [AccountControllers::class, 'getProfile']);

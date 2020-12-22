@@ -81,42 +81,69 @@
                                     <br>
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <form class="form-inline" role="form" method="post"
-                                                  @if(isset($user))
-                                                  action="admin/ManagePost/list/post-i-manage/{{$user->id}}">
-                                                @csrf
-                                                @else
-                                                    action="admin/ManagePost/list/post-i-manage">
-                                                @csrf
-                                                @endif
-                                                <div class="form-group">
-                                                    <label>Select Topic</label>
-                                                    <select class="form-control" id="topic_id" name="topic"
-                                                            onchange="getCategory();">
-                                                        @if(isset($topicC))
-                                                            @foreach($topic as $t)
-                                                                @if($topicC==$t->id)
-                                                                    <option value="{{$t->id}}"
-                                                                            selected>{{$t->name}}</option>
-                                                                @else
+                                            @if(isset($user))
+                                                <form class="form-inline" role="form" method="post"
+                                                      action="admin/ManagePost/list/post-i-manage/{{$user->id}}">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label>Select Topic</label>
+                                                        <select class="form-control" id="topic_id" name="topic"
+                                                                onchange="getCategory();">
+                                                            @if(isset($topicC))
+                                                                @foreach($topic as $t)
+                                                                    @if($topicC==$t->id)
+                                                                        <option value="{{$t->id}}"
+                                                                                selected>{{$t->name}}</option>
+                                                                    @else
+                                                                        <option value="{{$t->id}}">{{$t->name}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($topic as $t)
                                                                     <option value="{{$t->id}}">{{$t->name}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        @else
-                                                            @foreach($topic as $t)
-                                                                <option value="{{$t->id}}">{{$t->name}}</option>
-                                                            @endforeach
-                                                        @endif
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Select Category</label>
-                                                    <select class="form-control" id="category_id" name="category">
-                                                    </select>
-                                                </div>
-                                                <button type="submit" class="btn btn-default">Submit</button>
-                                            </form>
-
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Select Category</label>
+                                                        <select class="form-control" id="category_id" name="category">
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-default">Submit</button>
+                                                </form>
+                                            @else
+                                                <form class="form-inline" role="form" method="post"
+                                                      action="admin/ManagePost/list/post-i-manage">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label>Select Topic</label>
+                                                        <select class="form-control" id="topic_id" name="topic"
+                                                                onchange="getCategory();">
+                                                            @if(isset($topicC))
+                                                                @foreach($topic as $t)
+                                                                    @if($topicC==$t->id)
+                                                                        <option value="{{$t->id}}"
+                                                                                selected>{{$t->name}}</option>
+                                                                    @else
+                                                                        <option value="{{$t->id}}">{{$t->name}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($topic as $t)
+                                                                    <option value="{{$t->id}}">{{$t->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Select Category</label>
+                                                        <select class="form-control" id="category_id" name="category">
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-default">Submit</button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="panel panel-default">

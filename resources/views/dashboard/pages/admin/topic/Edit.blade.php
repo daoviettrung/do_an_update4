@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update topic</h1>
+                    <h1 class="page-header">Edit topic</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -56,7 +56,7 @@
                     @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form update Topic
+                            Form edit Topic
                         </div>
                         <div class="panel-body">
                             <form role="form" method="post" action="admin/ManageTopic/postEdit/{{$topic->id}}">

@@ -42,33 +42,6 @@ class PostController extends Controller
         return view('dashboard.pages.admin.post.my-post', ['posts' => $posts]);
     }
 
-    public function showPost($id=null)
-    {
-        if (isset($id)) {
-            $user = DB::table('users')->where('id', $id)->get();
-            foreach ($user as $u) {
-                $u = $u;
-            }
-            $posts = Post::select('tbl_post.*')->where('author_id', '=', $id)->get();
-            $topic = Topic::all();
-            $cate = Category::all();
-            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic, 'user' => $u, 'cate' => $cate]);
-        } else {
-            $topicFirst = DB::table('tbl_topic')->first();
-            $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
-                ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
-                ->where('tbl_topic.id', '=', $topicFirst->id)
-                ->select('tbl_post.*')
-                ->get();
-            $topic = Topic::all();
-            $cate = Category::all();
-            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic,'cate' => $cate]);
-        }
-
-    }
-
     public function getAddPost()
     {
         $topics = Topic::all();
@@ -109,36 +82,91 @@ class PostController extends Controller
             ->with('status', 'Post successfully created!');
     }
 
-    public function filter(Request $request,$id=null)
+
+    public function showPost($id = null)
     {
-        $topic = Topic::all();
-        $user = User::all();
-        $topicChoose = $request->topic;
-        $categoryChoose = $request->category;
-        if ($request->topic != 'NULL' && $request->category == 'all') {
+        if (isset($id)) {
+            $user = DB::table('users')->where('id', $id)->get();
+            foreach ($user as $u) {
+                $u = $u;
+            }
+            $posts = Post::select('tbl_post.*')->where('author_id', '=', $id)->get();
+            $topic = Topic::all();
+            $cate = Category::all();
+            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                'topic' => $topic, 'user' => $u, 'cate' => $cate]);
+        } else {
+            $topicFirst = DB::table('tbl_topic')->first();
             $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                 ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
-                ->where('tbl_topic.id', '=', $request->topic)
+                ->where('tbl_topic.id', '=', $topicFirst->id)
                 ->select('tbl_post.*')
                 ->get();
+            $topic = Topic::all();
+            $cate = Category::all();
             return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic, 'user' => $user, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
-        } elseif ($request->category != 'all') {
-            $posts = Post::leftjoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
-                ->where('tbl_category.id', '=', $request->category)
-                ->select('tbl_post.*')
-                ->get();
-            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic, 'user' => $user, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
-            //Lấy post theo poster
+                'topic' => $topic, 'cate' => $cate]);
+        }
 
-        } elseif ($id != null && $request->category != all) {
-            $posts = Post::select('tbl_post.*')
-                ->where('author_id', '=', $id)
-                ->where('category_id', '=', $request->category)
-                ->get();
-            return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic, 'user' => $user, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+    }
+
+    public function filter(Request $request, $id = null)
+    {
+        $topic = Topic::all();
+        $topicChoose = $request->topic;
+        $categoryChoose = $request->category;
+
+        if (isset($id) != null) {
+            $user = DB::table('users')->where('id', $id)->get();
+            foreach ($user as $u) {
+                $u = $u;
+            }
+            if($categoryChoose!="all"){
+                $posts = Post::select('tbl_post.*')
+                    ->where('author_id', '=', $id)
+                    ->where('category_id', '=', $request->category)
+                    ->get();
+                return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+            }
+            if($categoryChoose=="all"){
+                $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
+                    ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
+                    ->where('tbl_topic.id', '=', $request->topic)
+                    ->where('author_id','=',$id)
+                    ->select('tbl_post.*')
+                    ->get();
+                return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+            }
+
+        } else {
+
+            if ($request->topic != 'NULL' && $request->category == 'all') {
+                $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
+                    ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
+                    ->where('tbl_topic.id', '=', $request->topic)
+                    ->select('tbl_post.*')
+                    ->get();
+                return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+            } elseif ($request->category != 'all') {
+                $posts = Post::leftjoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
+                    ->where('tbl_category.id', '=', $request->category)
+                    ->select('tbl_post.*')
+                    ->get();
+                return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                //Lấy post theo poster
+
+            } elseif ($id != null && $request->category != all) {
+                $posts = Post::select('tbl_post.*')
+                    ->where('author_id', '=', $id)
+                    ->where('category_id', '=', $request->category)
+                    ->get();
+                return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+            }
         }
     }
 

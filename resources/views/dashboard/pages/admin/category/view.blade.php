@@ -49,7 +49,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#myPost" data-toggle="tab">List Topic</a>
+                                    <a href="#myPost" data-toggle="tab">List Category</a>
                                 </li>
                             </ul>
 

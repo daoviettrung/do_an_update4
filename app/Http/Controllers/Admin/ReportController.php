@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Report;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller{
     public function viewReport(){
@@ -19,5 +20,12 @@ class ReportController extends Controller{
             $j+=1;
         }
         var_dump($id_cmt);
+    }
+    public function getMonth(Request $request){
+        $report=Report::select('tbl_report.*')
+            ->whereMonth('created_at','=',$request->month)
+            ->whereDay('created_at','=',$request->day)
+            ->get();
+        return view('dashboard.pages.admin.report.view',['report'=>$report]);
     }
 }
