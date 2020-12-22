@@ -67,8 +67,8 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Topic</th>
-                                                        <th>Update</th>
-                                                        <th>Delete</th>
+                                                        <th>Created_at</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -76,6 +76,7 @@
                                                         <tr>
                                                             <td>{{$c->name}}</td>
                                                             <td>{{$c->topic->name}}</td>
+                                                            <td>{{$c->created_at}} </td>
                                                             <td>
                                                                 <a href="admin/ManageCategory/getEdit/{{$c->id}}">
                                                                     <button type="button"
@@ -83,8 +84,6 @@
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                            </td>
-                                                            <td>
                                                                 <form method="post" action="admin/ManageCategory/delete/{{$c->id}}">
                                                                     @csrf
                                                                     <button type="submit"

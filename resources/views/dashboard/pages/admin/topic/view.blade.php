@@ -67,8 +67,8 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Mod</th>
-                                                        <th>Update</th>
-                                                        <th>Delete</th>
+                                                        <th>Created_at</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -76,6 +76,7 @@
                                                         <tr>
                                                             <td>{{$t->name}}</td>
                                                             <td>{{$t->mod->name}}</td>
+                                                            <td>{{$t->created_at}}</td>
                                                             <td>
                                                                 <a href="admin/ManageTopic/getEdit/{{$t->id}}">
                                                                     <button type="button"
@@ -83,8 +84,6 @@
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                            </td>
-                                                            <td>
                                                                 <form method="post" action="admin/ManageTopic/delete/{{$t->id}}">
                                                                     @csrf
                                                                     <button type="submit"

@@ -82,12 +82,13 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <form class="form-inline" role="form" method="post"
-                                                  @if(isset($u))
+                                                  @if(isset($user))
                                                   action="admin/ManagePost/list/post-i-manage/{{$user->id}}">
+                                                @csrf
                                                 @else
                                                     action="admin/ManagePost/list/post-i-manage">
-                                                @endif
                                                 @csrf
+                                                @endif
                                                 <div class="form-group">
                                                     <label>Select Topic</label>
                                                     <select class="form-control" id="topic_id" name="topic"
@@ -115,6 +116,7 @@
                                                 </div>
                                                 <button type="submit" class="btn btn-default">Submit</button>
                                             </form>
+
                                         </div>
                                     </div>
                                     <div class="panel panel-default">

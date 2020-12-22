@@ -42,7 +42,7 @@ class PostController extends Controller
         return view('dashboard.pages.admin.post.my-post', ['posts' => $posts]);
     }
 
-    public function showPost($id = null)
+    public function showPost($id=null)
     {
         if (isset($id)) {
             $user = DB::table('users')->where('id', $id)->get();
@@ -62,10 +62,9 @@ class PostController extends Controller
                 ->select('tbl_post.*')
                 ->get();
             $topic = Topic::all();
-            $user = User::all();
             $cate = Category::all();
             return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                'topic' => $topic, 'user' => $user, 'cate' => $cate]);
+                'topic' => $topic,'cate' => $cate]);
         }
 
     }
@@ -110,7 +109,7 @@ class PostController extends Controller
             ->with('status', 'Post successfully created!');
     }
 
-    public function filter(Request $request, $id = null)
+    public function filter(Request $request,$id=null)
     {
         $topic = Topic::all();
         $user = User::all();

@@ -9,8 +9,15 @@ class ReportController extends Controller{
         $report=Report::all();
         return view('dashboard.pages.admin.report.view',['report'=>$report]);
     }
-    public function viewPost($id){
-        $post_id=explode("_",$id);
-        var_dump($post_id[0]);
+    public function viewPost($id)
+    {
+        $post_id = explode("_", $id);
+        $j = 0;
+        $id_cmt=[];
+        for($i=1;$i<= count($post_id);$i++){
+            $id_cmt[$j]=$post_id[$i];
+            $j+=1;
+        }
+        var_dump($id_cmt);
     }
 }
