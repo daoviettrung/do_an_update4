@@ -23,13 +23,14 @@ class PostController extends Controller
         return strtoupper($id);
     }
 
-    public function getCategory($topic_id)
+    public function getCategory(Request $request,$topic_id)
     {
+        echo "<option value=" . 'all' . ">   </option>";
         $categories = Category::where('topic_id', '=', $topic_id)->get();
         foreach ($categories as $category) {
             echo "<option value=" . $category->id . ">" . $category->name . "</option>";
         }
-        echo "<option value=" . 'all' . ">   </option>";
+
     }
 
 
@@ -113,6 +114,7 @@ class PostController extends Controller
     public function filter(Request $request, $id = null)
     {
         $topic = Topic::all();
+        $cate=Category::all();
         $topicChoose = $request->topic;
         $categoryChoose = $request->category;
 
@@ -121,23 +123,23 @@ class PostController extends Controller
             foreach ($user as $u) {
                 $u = $u;
             }
-            if($categoryChoose!="all"){
+            if ($categoryChoose != "all") {
                 $posts = Post::select('tbl_post.*')
                     ->where('author_id', '=', $id)
                     ->where('category_id', '=', $request->category)
                     ->get();
                 return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose,'cate'=>$cate]);
             }
-            if($categoryChoose=="all"){
+            if ($categoryChoose == "all") {
                 $posts = Post::leftJoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                     ->leftJoin('tbl_topic', 'tbl_topic.id', '=', 'tbl_category.topic_id')
                     ->where('tbl_topic.id', '=', $request->topic)
-                    ->where('author_id','=',$id)
+                    ->where('author_id', '=', $id)
                     ->select('tbl_post.*')
                     ->get();
                 return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                    'topic' => $topic, 'user' => $u, 'topicC' => $topicChoose, 'cateC' => $categoryChoose,'cate'=>$cate]);
             }
 
         } else {
@@ -149,14 +151,14 @@ class PostController extends Controller
                     ->select('tbl_post.*')
                     ->get();
                 return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose,'cate'=>$cate]);
             } elseif ($request->category != 'all') {
                 $posts = Post::leftjoin('tbl_category', 'tbl_category.id', '=', 'tbl_post.category_id')
                     ->where('tbl_category.id', '=', $request->category)
                     ->select('tbl_post.*')
                     ->get();
                 return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose,'cate'=>$cate]);
                 //Lấy post theo poster
 
             } elseif ($id != null && $request->category != all) {
@@ -165,7 +167,7 @@ class PostController extends Controller
                     ->where('category_id', '=', $request->category)
                     ->get();
                 return view('dashboard.pages.admin.post.post-i-manage', ['post' => $posts,
-                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose]);
+                    'topic' => $topic, 'topicC' => $topicChoose, 'cateC' => $categoryChoose,'cate'=>$cate]);
             }
         }
     }

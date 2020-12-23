@@ -14,8 +14,12 @@ class CategoryController extends Controller
 {
     public function viewCate()
     {
-        $cate = Category::all();
-        return view('dashboard.pages.admin.category.view', [ 'cate' => $cate]);
+        $topic=Topic::all();
+        $topicFirst = DB::table('tbl_topic')->first();
+        $cate=Category::select('tbl_category.*')
+            ->where('topic_id','=',$topicFirst->id)
+            ->get();
+        return view('dashboard.pages.admin.category.view', [ 'cate' => $cate,'topic'=>$topic]);
     }
 
     public function getAddCate()
@@ -115,6 +119,14 @@ class CategoryController extends Controller
         $cate->save();
         return $this->viewCate();
 
+    }
+    public function filter(Request  $request){
+        $topic=Topic::all();
+        $topicC=$request->topic;
+        $cate=Category::select('tbl_category.*')
+            ->where('topic_id','=',$request->topic)
+            ->get();
+        return view('dashboard.pages.admin.category.view', [ 'cate' => $cate,'topic'=>$topic,'topicC'=>$topicC]);
     }
 }
 

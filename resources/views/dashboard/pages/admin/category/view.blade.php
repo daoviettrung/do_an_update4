@@ -60,6 +60,32 @@
                                     <div class="panel panel-default">
                                         <!-- /.panel-heading -->
                                         <div class="panel-body">
+                                            <form style="margin-left: 300px" class="form-inline" role="form"
+                                                  method="post"
+                                                  action="admin/ManageCategory/filter">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label>Select Topic</label>
+                                                    <select class="form-control" id="topic_id" name="topic"
+                                                            onchange="getCategory();">
+                                                        @if(isset($topicC))
+                                                            @foreach($topic as $t)
+                                                                @if($topicC==$t->id)
+                                                                    <option value="{{$t->id}}"
+                                                                            selected>{{$t->name}}</option>
+                                                                @else
+                                                                    <option value="{{$t->id}}">{{$t->name}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            @foreach($topic as $t)
+                                                                <option value="{{$t->id}}">{{$t->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-default">Submit</button>
+                                            </form>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover"
                                                        id="table1">
@@ -84,7 +110,8 @@
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <form method="post" action="admin/ManageCategory/delete/{{$c->id}}">
+                                                                <form method="post"
+                                                                      action="admin/ManageCategory/delete/{{$c->id}}">
                                                                     @csrf
                                                                     <button type="submit"
                                                                             class="btn btn-danger btn-circle"

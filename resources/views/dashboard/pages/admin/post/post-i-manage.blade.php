@@ -139,6 +139,20 @@
                                                     <div class="form-group">
                                                         <label>Select Category</label>
                                                         <select class="form-control" id="category_id" name="category">
+                                                            @if(isset($cateC))
+                                                                @foreach($cate as $c)
+                                                                    @if($cateC==$c->id)
+                                                                        <option value="{{$c->id}}"
+                                                                                selected>{{$c->name}}</option>
+                                                                    @else
+                                                                        <option value="{{$c->id}}">{{$c->name}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($cate as $c)
+                                                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                     <button type="submit" class="btn btn-default">Submit</button>
@@ -216,7 +230,6 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function () {
-            getCategory();
             $('#table1').DataTable();
         });
     </script>

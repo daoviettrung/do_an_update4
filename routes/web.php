@@ -64,6 +64,7 @@ Route::prefix('admin')->group(function(){
         Route::get('getEdit/{id}',[CategoryController::class,'getEdit']);
         Route::post('postEdit/{id}',[CategoryController::class,'postEdit']);
         Route::post('delete/{id}',[CategoryController::class,'delete']);
+        Route::post('filter',[CategoryController::class,'filter']);
     });
     Route::prefix('ManageUser')->group(function(){
         Route::get('view',[UserController::class,'viewUser']);

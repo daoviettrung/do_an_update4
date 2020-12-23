@@ -43,7 +43,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div style="width: 800px" class="col-lg-12">
+                <div style="width: 800px;" class="col-lg-12">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -59,7 +59,7 @@
                             {{ session()->get('success') }}
                         </div>
                     @endif
-                    <div style="margin-left: 300px" class="panel panel-default">
+                    <div style="margin-left: 20px ;width: 500px" class="panel panel-default">
                         <div class="panel-heading">
                             Form Add Topic
                         </div>
@@ -105,6 +105,35 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+                </div>
+                <div style="width: 300px; margin-left: 100px" class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-twitter fa-fw"></i>Information admin
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i></i> Name :{{Auth::user()->name}}
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i></i> Email:{{Auth::user()->email}}
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i></i> Gender:{{Auth::user()->gender}}
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i></i> Birthday:{{Auth::user()->birthday}}
+                                </a>
+                            </div>
+                            <!-- /.list-group -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <!-- /.panel -->
+                    <!-- /.panel .chat-panel -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
