@@ -87,7 +87,7 @@
                                                                 <td>Admin</td>
                                                             @endif
                                                             <td>{{ App\Models\Post::where('author_id', $u->id)->count()}}
-                                                                <a href="admin/ManagePost/list/post-i-manage/{{$u->id}}">
+                                                                <a href="admin/manage-post/list/post-i-manage/{{$u->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>
@@ -99,13 +99,13 @@
                                                             </td>
                                                             <td>
                                                                 @if($u->name!=Auth::user()->name&&$u->level!=2)
-                                                                <a href="admin/ManageUser/getEdit/{{$u->id}}">
+                                                                <a href="admin/manage-user/get-edit/{{$u->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <form method="post" action="admin/ManageUser/delete/{{$u->id}}">
+                                                                <form method="post" action="admin/manage-user/delete/{{$u->id}}">
                                                                     @csrf
                                                                     <button type="submit"
                                                                             class="btn btn-danger btn-circle"

@@ -34,9 +34,9 @@ use App\Http\Controllers\Admin\AccountControllers;
 //=========================Trung==================================
 
 Route::prefix('admin')->group(function(){
-    Route::get('Dashboard',[RedirectController::class,'getAdminDashboard']);
-    Route::prefix('ManagePost')->group(function (){
-        Route::get('getCategory/{topic_id}',[PostController::class,'getCategory']);
+    Route::get('dashboard',[RedirectController::class,'getAdminDashboard']);
+    Route::prefix('manage-post')->group(function (){
+        Route::get('get-category/{topic_id}',[PostController::class,'getCategory']);
         Route::get('list/my-post', [PostController::class, 'getMyPost']);
         Route::get('list/post-i-manage/{id?}', [PostController::class, 'showPost']);
         Route::post('list/post-i-manage/{id?}', [PostController::class, 'filter']);
@@ -49,33 +49,33 @@ Route::prefix('admin')->group(function(){
         // Route::get('ViewPost/{id}',[PostController::class,'viewPost']);
         // Route::post('filter',[PostController::class,'filter']);
     });
-    Route::prefix('ManageTopic')->group(function (){
+    Route::prefix('manage-topic')->group(function (){
         Route::get('view',[TopicController::class,'viewTopic']);
-        Route::get('getAdd',[TopicController::class,'getAddTopic']);
-        Route::post('postAdd',[TopicController::class,'postAddTopic']);
+        Route::get('get-add',[TopicController::class,'getAddTopic']);
+        Route::post('post-add',[TopicController::class,'postAddTopic']);
         Route::post('delete/{id}',[TopicController::class,'delete']);
-        Route::get('getEdit/{id}',[TopicController::class,'getEdit']);
-        Route::post('postEdit/{id}',[TopicController::class,'postEdit']);
+        Route::get('get-edit/{id}',[TopicController::class,'getEdit']);
+        Route::post('post-edit/{id}',[TopicController::class,'postEdit']);
     });
-    Route::prefix('ManageCategory')->group(function (){
+    Route::prefix('manage-category')->group(function (){
         Route::get('view',[CategoryController::class,'viewCate']);
-        Route::get('getAdd',[CategoryController::class,'getAddCate']);
-        Route::post('postAdd',[CategoryController::class,'postAddCate']);
-        Route::get('getEdit/{id}',[CategoryController::class,'getEdit']);
-        Route::post('postEdit/{id}',[CategoryController::class,'postEdit']);
+        Route::get('get-add',[CategoryController::class,'getAddCate']);
+        Route::post('post-add',[CategoryController::class,'postAddCate']);
+        Route::get('get-edit/{id}',[CategoryController::class,'getEdit']);
+        Route::post('post-edit/{id}',[CategoryController::class,'postEdit']);
         Route::post('delete/{id}',[CategoryController::class,'delete']);
         Route::post('filter',[CategoryController::class,'filter']);
     });
-    Route::prefix('ManageUser')->group(function(){
+    Route::prefix('manage-user')->group(function(){
         Route::get('view',[UserController::class,'viewUser']);
-        Route::get('getEdit/{idU}',[UserController::class,'getEdit']);
-        Route::post('postEdit/{idU}',[UserController::class,'postEdit']);
+        Route::get('get-edit/{idU}',[UserController::class,'getEdit']);
+        Route::post('post-edit/{idU}',[UserController::class,'postEdit']);
         Route::post('delete/{idU}',[UserController::class,'delete']);
-        Route::get('ViewPost/{id}',[UserController::class,'viewPost']);
+        Route::get('view-post/{id}',[UserController::class,'viewPost']);
     });
-    Route::prefix('ManageReport')->group(function(){
+    Route::prefix('manage-report')->group(function(){
         Route::get('view',[ReportController::class,'viewReport']);
-        Route::get('ViewPost/{id}',[ReportController::class,'viewPost']);
+        Route::get('view-post/{id}',[ReportController::class,'viewPost']);
         Route::post('month',[ReportController::class,'getMonth']);
 
     });
@@ -88,6 +88,9 @@ Route::prefix('admin')->group(function(){
     });
 
 });
+
+
+
 Route::get('lg',[AuthController::class,'login']);
 Route::post('login',[AuthController::class,'checkLogin']);
 Route::prefix('client')->group(function () {

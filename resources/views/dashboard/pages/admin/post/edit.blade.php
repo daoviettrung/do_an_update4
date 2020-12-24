@@ -64,7 +64,7 @@
                             Form Edit Post
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManagePost/edit">
+                            <form role="form" method="post" action="admin/manage-post/edit">
                                 @csrf
                                 <input name="id" value="{{$post->id}}" hidden>
                                 <div class="row">
@@ -201,7 +201,7 @@
             var topic_id = $("#topic_id").val();
             $.ajax({
                 type: "get",
-                url: "admin/ManagePost/getCategory/" + topic_id,
+                url: "admin/manage-post/getCategory/" + topic_id,
                 success: function (res) {
                     $("#category_id").html(res);
                 }

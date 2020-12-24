@@ -61,7 +61,7 @@
                                         <!-- /.panel-heading -->
                                         <div class="panel-body">
                                             <form style="margin-left: 300px" class="form-inline" role="form" method="post"
-                                                  action="admin/ManageReport/month">
+                                                  action="admin/manage-report/month">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label>Select day</label>
@@ -136,7 +136,7 @@
                                                             <td>{{$r->user->name}}</td>
                                                             <td>{{$r->content}}</td>
                                                             <td>
-                                                                <a href="admin/ManageReport/ViewPost/{{$r->post_id}}">
+                                                                <a href="admin/manage-report/view-post/{{$r->post_id}}">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>

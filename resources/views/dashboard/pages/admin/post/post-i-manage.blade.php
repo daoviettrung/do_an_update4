@@ -66,7 +66,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li>
-                                    <a href="admin/ManagePost/list/my-post">My post</a>
+                                    <a href="admin/manage-post/list/my-post">My post</a>
                                 </li>
                                 <li class="active">
                                     <a href="#postOnTopic" data-toggle="tab">Post I manage</a>
@@ -83,7 +83,7 @@
                                         <div class="panel-body">
                                             @if(isset($user))
                                                 <form class="form-inline" role="form" method="post"
-                                                      action="admin/ManagePost/list/post-i-manage/{{$user->id}}">
+                                                      action="admin/manage-post/list/post-i-manage/{{$user->id}}">
                                                     @csrf
                                                     <div class="form-group">
                                                         <label>Select Topic</label>
@@ -114,7 +114,7 @@
                                                 </form>
                                             @else
                                                 <form class="form-inline" role="form" method="post"
-                                                      action="admin/ManagePost/list/post-i-manage">
+                                                      action="admin/manage-post/list/post-i-manage">
                                                     @csrf
                                                     <div class="form-group">
                                                         <label>Select Topic</label>
@@ -179,7 +179,7 @@
                                                             <td>{{$p->category->name}}</td>
                                                             <td>{{$p->title}}</td>
                                                             <td>
-                                                                <a href="admin/ManagePost/ViewPost/{{$p->id}}">
+                                                                <a href="admin/manage-post/view-post/{{$p->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>
@@ -244,7 +244,7 @@
             var topic_id = $("#topic_id").val();
             $.ajax({
                 type: "get",
-                url: "admin/ManagePost/getCategory/" + topic_id,
+                url: "admin/manage-post/get-category/" + topic_id,
                 success: function (res) {
                     $("#category_id").html(res);
                 }

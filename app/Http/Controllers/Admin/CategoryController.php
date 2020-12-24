@@ -15,10 +15,7 @@ class CategoryController extends Controller
     public function viewCate()
     {
         $topic=Topic::all();
-        $topicFirst = DB::table('tbl_topic')->first();
-        $cate=Category::select('tbl_category.*')
-            ->where('topic_id','=',$topicFirst->id)
-            ->get();
+        $cate=Category::all();
         return view('dashboard.pages.admin.category.view', [ 'cate' => $cate,'topic'=>$topic]);
     }
 

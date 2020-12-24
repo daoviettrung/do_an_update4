@@ -64,7 +64,7 @@
                             Form Add Category
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManageCategory/postAdd">
+                            <form role="form" method="post" action="admin/manage-category/post-add">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-8">

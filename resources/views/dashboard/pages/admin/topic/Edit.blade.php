@@ -59,7 +59,7 @@
                             Form edit Topic
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManageTopic/postEdit/{{$topic->id}}">
+                            <form role="form" method="post" action="admin/manage-topic/post-edit/{{$topic->id}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-8">

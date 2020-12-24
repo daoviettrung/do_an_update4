@@ -60,7 +60,7 @@
                             Form Update User
                         </div>
                         <div class="panel-body">
-                            <form style="width: 500px" role="form" method="post" action="admin/ManageUser/postEdit/{{$user->id}}">
+                            <form style="width: 500px" role="form" method="post" action="admin/manage-user/post-edit/{{$user->id}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-8">

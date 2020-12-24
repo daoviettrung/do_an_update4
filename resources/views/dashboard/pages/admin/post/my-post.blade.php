@@ -58,7 +58,7 @@
                                     <a href="#myPost" data-toggle="tab">My post</a>
                                 </li>
                                 <li>
-                                    <a href="admin/ManagePost/list/post-i-manage">Post I manage</a>
+                                    <a href="admin/manage-post/list/post-i-manage">Post I manage</a>
                                 </li>
                             </ul>
 
@@ -106,20 +106,20 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                <a href="admin/ManagePost/view/{{$post->id}}"
+                                                                <a href="admin/manage-post/view/{{$post->id}}"
                                                                    target="_blank">
                                                                     <button type="button"
                                                                             class="btn btn-success btn-circle">
                                                                         <i class="fa fa-eye"></i>
                                                                     </button>
                                                                 </a>
-                                                                <a href="admin/ManagePost/edit/{{$post->id}}">
+                                                                <a href="admin/manage-post/edit/{{$post->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <form method="post" action="admin/ManagePost/delete">
+                                                                <form method="post" action="admin/manage-post/delete">
                                                                     @csrf
                                                                     <input name="id" value="{{$post->id}}"
                                                                            hidden>

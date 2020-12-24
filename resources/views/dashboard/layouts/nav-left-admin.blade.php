@@ -13,16 +13,16 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="admin/Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="admin/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-dashboard fa-fw"></i> Manage post</a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManagePost/list/my-post">View post</a>
+                        <a href="admin/manage-post/list/my-post">View post</a>
                     </li>
                     <li>
-                        <a href="admin/ManagePost/add">Add post</a>
+                        <a href="admin/manage-post/add">Add post</a>
                     </li>
                 </ul>
             </li>
@@ -30,10 +30,10 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage Topic<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManageTopic/view">View Topic</a>
+                        <a href="admin/manage-topic/view">View Topic</a>
                     </li>
                     <li>
-                        <a href="admin/ManageTopic/getAdd">Add topic</a>
+                        <a href="admin/manage-topic/get-add">Add topic</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -42,10 +42,10 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage Category<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManageCategory/view">View Category</a>
+                        <a href="admin/manage-category/view">View Category</a>
                     </li>
                     <li>
-                        <a href="admin/ManageCategory/getAdd">Add Categoy</a>
+                        <a href="admin/manage-category/get-add">Add Categoy</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -54,7 +54,7 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage User<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManageUser/view">View user</a>
+                        <a href="admin/manage-user/view">View user</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -63,7 +63,7 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage Report<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/ManageReport/view">View report</a>
+                        <a href="admin/manage-report/view">View report</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

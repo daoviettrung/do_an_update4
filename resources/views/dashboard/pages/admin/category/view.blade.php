@@ -62,7 +62,7 @@
                                         <div class="panel-body">
                                             <form style="margin-left: 300px" class="form-inline" role="form"
                                                   method="post"
-                                                  action="admin/ManageCategory/filter">
+                                                  action="admin/manage-category/filter">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label>Select Topic</label>
@@ -104,14 +104,14 @@
                                                             <td>{{$c->topic->name}}</td>
                                                             <td>{{$c->created_at}} </td>
                                                             <td>
-                                                                <a href="admin/ManageCategory/getEdit/{{$c->id}}">
+                                                                <a href="admin/manage-category/get-edit/{{$c->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
                                                                 <form method="post"
-                                                                      action="admin/ManageCategory/delete/{{$c->id}}">
+                                                                      action="admin/manage-category/delete/{{$c->id}}">
                                                                     @csrf
                                                                     <button type="submit"
                                                                             class="btn btn-danger btn-circle"

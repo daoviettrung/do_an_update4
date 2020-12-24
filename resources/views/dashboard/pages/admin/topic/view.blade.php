@@ -78,13 +78,13 @@
                                                             <td>{{$t->mod->name}}</td>
                                                             <td>{{$t->created_at}}</td>
                                                             <td>
-                                                                <a href="admin/ManageTopic/getEdit/{{$t->id}}">
+                                                                <a href="admin/manage-topic/get-edit/{{$t->id}}">
                                                                     <button type="button"
                                                                             class="btn btn-info btn-circle">
                                                                         <i class="fa fa-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <form method="post" action="admin/ManageTopic/delete/{{$t->id}}">
+                                                                <form method="post" action="admin/manage-topic/delete/{{$t->id}}">
                                                                     @csrf
                                                                     <button type="submit"
                                                                             class="btn btn-danger btn-circle"

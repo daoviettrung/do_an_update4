@@ -64,7 +64,7 @@
                             Form Add Topic
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManageTopic/postAdd">
+                            <form role="form" method="post" action="admin/manage-topic/post-add">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-8">

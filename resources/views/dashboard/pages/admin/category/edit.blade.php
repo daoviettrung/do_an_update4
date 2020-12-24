@@ -64,7 +64,7 @@
                             Form edit Category
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post" action="admin/ManageCategory/postEdit/{{$cate->id}}">
+                            <form role="form" method="post" action="admin/manage-category/post-edit/{{$cate->id}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-8">

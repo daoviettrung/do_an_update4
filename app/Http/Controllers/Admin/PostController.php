@@ -79,7 +79,7 @@ class PostController extends Controller
         }
         $post->is_post = true;
         $post->save();
-        return redirect('admin/ManagePost/list/my-post')
+        return redirect('admin/manage-post/list/my-post')
             ->with('status', 'Post successfully created!');
     }
 

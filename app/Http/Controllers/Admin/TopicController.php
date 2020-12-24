@@ -111,7 +111,7 @@ class TopicController extends Controller{
         foreach ($idT as $t){
             $t=$t;
         }
-        return view('dashboard.pages.admin.topic.Edit',['topic'=>$t,'user'=>$user]);
+        return view('dashboard.pages.admin.topic.edit',['topic'=>$t,'user'=>$user]);
     }
     public function postEdit(Request $request,$id){
         $idT=DB::table('tbl_topic')->where('id',$id)->get();
