@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class RedirectController extends Controller
 {
@@ -21,11 +22,26 @@ class RedirectController extends Controller
         return redirect('/login');
     }
 
-    public function getAdminDashboard()
+    public function getAdminDashboard($id=null)
     {
-        $count_all_post = Post::where('author_id', '=', Auth::id())
-                ->where('is_post', '=', 1)
-                ->count() ?? 0;
-        return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post]);
+        if($id==null){
+            $count_all_post = Post::where('author_id', '=', Auth::id())
+                    ->where('status', '!=', 'comment')
+                    ->count() ?? 0;
+            return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post]);
+        }
+        else{
+            $user= DB::table('users')->where('id', $id)
+                ->get();
+            foreach ($user as $u){
+                $u=$u;
+            }
+            $count_all_post = Post::where('author_id', '=', $u->id)
+                    ->where('status', '!=', 'comment')
+                    ->count() ?? 0;
+            return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post,'user'=>$u]);
+
+        }
+
     }
 }

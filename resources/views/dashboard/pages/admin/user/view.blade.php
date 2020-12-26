@@ -74,7 +74,7 @@
                                                     <tbody id="post-i-manage">
                                                     @foreach($user as $u)
                                                         <tr>
-                                                            <td>{{$u->name}}</td>
+                                                            <td><a href="admin/dashboard/{{$u->id}}">{{$u->name}}</a></td>
                                                             <td>{{$u->email}}</td>
                                                             <td>{{$u->gender}}</td>
                                                             @if($u->level==0)

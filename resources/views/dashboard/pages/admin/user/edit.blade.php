@@ -69,12 +69,6 @@
                                             <input style="width: 300px" class="form-control" id="title" onkeyup="ChangeToSlug();"
                                                    name="name"  value="{{$user->name}}" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input style="width: 300px" class="form-control" id="title" onkeyup="ChangeToSlug();"
-                                                   name="email" value="{{$user->email}}" required>
-                                        </div>
-
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                     <div class="col-lg-4">

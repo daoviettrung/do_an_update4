@@ -102,7 +102,7 @@ class TopicController extends Controller{
             $c_delete->delete();
         }
         $topic->delete();
-        return $this->viewTopic();
+        return redirect('admin/manage-topic/view');
     }
     public function getEdit($id){
         $user=User::select('users.*')->where('level','=',1)->get();
@@ -130,7 +130,7 @@ class TopicController extends Controller{
         $topic->mod_id=$m->id;
         $topic->save();
         session()->flash('success', 'Edit successfully');
-        return $this->viewTopic();
+        return redirect('admin/manage-topic/view');
 
     }
 }

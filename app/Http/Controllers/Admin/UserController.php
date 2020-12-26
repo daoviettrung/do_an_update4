@@ -27,16 +27,12 @@ class UserController extends Controller{
         foreach ($idU as $u){
             $u=$u;
         }
-        $name=$request->name;
-        $name= explode(" ",$name);
         $user=User::find($u->id);
         $user->name=$request->name;
-        $user->email=$request->email;
         $user->gender = $request->gender;
         $user->level = $request->level;
         $user->save();
-        return $this->viewUser();
-
+        return redirect('admin/manage-user/view');
     }
     public function delete($idU){
         $idU=DB::table('users')->where('id',$idU)->get();
@@ -50,7 +46,7 @@ class UserController extends Controller{
         }
         $user = User::find($u->id);
         $user->delete();
-        return $this->viewUser();
+        return redirect('admin/manage-user/view');
     }
     public function viewPost($id){
 

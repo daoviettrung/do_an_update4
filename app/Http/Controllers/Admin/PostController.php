@@ -37,7 +37,7 @@ class PostController extends Controller
     public function getMyPost()
     {
         $posts = Post::where('author_id', '=', Auth::id())
-            ->where('is_post', '=', true)
+            ->where('status', '!=', 'comment')
             ->latest()
             ->get();
         return view('dashboard.pages.admin.post.my-post', ['posts' => $posts]);
@@ -61,7 +61,7 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->title = $request->title;
         $post->slug = $request->slug;
-        $post_latest = Post::where('is_post', '=', true)
+        $post_latest = Post::where('status', 'like', 'post%')
             ->latest()
             ->first();
         if ($post_latest) {
@@ -72,12 +72,12 @@ class PostController extends Controller
         }
         $post->id = $post_id;
         $post->content = $request->_content;
-        if ($post->category->topic->mod_id == $post->author_id || Auth::user()->level == 2) {
-            $post->status = 'display';
+        $post->description = $request->description;
+        if ($post->author->level == 2) {
+            $post->status = 'post display';
         } else {
-            $post->status = 'approval';
+            $post->status = 'post approval';
         }
-        $post->is_post = true;
         $post->save();
         return redirect('admin/manage-post/list/my-post')
             ->with('status', 'Post successfully created!');
@@ -184,7 +184,7 @@ class PostController extends Controller
                 ->where('author_id', '=', Auth::id())
                 ->first());
         if (!$post) {
-            return abort(404);
+            abort(404);
         }
         return view('dashboard.pages.admin.post.edit',
             [
@@ -203,15 +203,16 @@ class PostController extends Controller
         $post = Post::where('id', '=', $request->id)
             ->where('author_id', '=', Auth::id())
             ->first();
-        if ($post->status == 'approval' || $post->category->topic->mod_id == $post->author_id || Auth::user()->level == 2) {
+        if ($post->status == 'post approval' || $post->category->topic->mod_id == $post->author_id || Auth::user()->level == 2) {
             $post->category_id = $request->category_id;
             $post->title = $request->title;
             $post->slug = $request->slug;
             $post->content = $request->_content;
+            $post->description = $request->description;
             $post->save();
         } else {
-            if ($post->status == 'display') {
-                $post->status = 'update';
+            if ($post->status == 'post display') {
+                $post->status = 'post update';
                 $post->save();
             }
             $post_update = Post::find($post->id . '_UPDATE') ?? new Post();
@@ -221,8 +222,8 @@ class PostController extends Controller
             $post_update->title = $request->title;
             $post_update->slug = $request->slug;
             $post_update->content = $request->_content;
-            $post_update->status = 'approval';
-            $post_update->is_post = false;
+            $post_update->description = $request->description;
+            $post_update->status = 'update';
             $post_update->save();
         }
         return back()->with('status', 'Edit successfully!');

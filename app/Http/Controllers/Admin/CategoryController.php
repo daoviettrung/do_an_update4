@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $p_delete->delete();
         }
         $cate->delete();
-        return $this->viewCate();
+        return redirect('admin/manage-category/view');
     }
     public function getEdit($id){
         $topic=Topic::all();
@@ -114,7 +114,7 @@ class CategoryController extends Controller
         $cate->slug=$request->slug;
         $cate->topic_id=$t->id;
         $cate->save();
-        return $this->viewCate();
+        return redirect('admin/manage-category/view');
 
     }
     public function filter(Request  $request){
