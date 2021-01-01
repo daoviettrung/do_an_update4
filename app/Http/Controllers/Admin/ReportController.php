@@ -12,14 +12,16 @@ class ReportController extends Controller{
     }
     public function viewPost($id)
     {
-        $post_id = explode("_", $id);
-        $j = 0;
-        $id_cmt=[];
-        for($i=1;$i<= count($post_id);$i++){
-            $id_cmt[$j]=$post_id[$i];
-            $j+=1;
+        $i=0;
+        $id_cmt_cut=[];
+        $id_cmt=explode("_",$id);
+        unset($id_cmt[0]);
+        foreach ($id_cmt as $ic){
+            $id_cmt_cut[$i]=$ic;
+            $i+=1;
         }
-        var_dump($id_cmt);
+        $id_cmt_cut=implode("_",$id_cmt_cut);
+        var_dump($id_cmt_cut);
     }
     public function getMonth(Request $request){
         $report=Report::select('tbl_report.*')
