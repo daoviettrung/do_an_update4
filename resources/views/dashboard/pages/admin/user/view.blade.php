@@ -74,11 +74,12 @@
                                                     <tbody id="post-i-manage">
                                                     @foreach($user as $u)
                                                         <tr>
-                                                            <td><a href="admin/dashboard/{{$u->id}}">{{$u->name}}</a></td>
+                                                            <td><a href="admin/dashboard/{{$u->id}}">{{$u->name}}</a>
+                                                            </td>
                                                             <td>{{$u->email}}</td>
                                                             <td>{{$u->gender}}</td>
                                                             @if($u->level==0)
-                                                            <td>Member</td>
+                                                                <td>Member</td>
                                                             @endif
                                                             @if($u->level==1)
                                                                 <td>Mod</td>
@@ -99,21 +100,39 @@
                                                             </td>
                                                             <td>
                                                                 @if($u->name!=Auth::user()->name&&$u->level!=2)
-                                                                <a href="admin/manage-user/get-edit/{{$u->id}}">
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-circle">
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </button>
-                                                                </a>
-                                                                <form method="post" action="admin/manage-user/delete/{{$u->id}}">
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                            class="btn btn-danger btn-circle"
-                                                                            onclick="return confirm('If you delete this account, posts will also be deleted. If you still want to delete click ok ');">
-                                                                        <i class="fa fa-trash"></i>
-                                                                    </button>
-                                                                </form>
-                                                                    @endif
+                                                                    <a href="admin/manage-user/get-edit/{{$u->id}}">
+                                                                        <button type="button"
+                                                                                class="btn btn-info btn-circle">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                    <form method="post"
+                                                                          action="admin/manage-user/delete/{{$u->id}}">
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                                class="btn btn-danger btn-circle"
+                                                                                onclick="return confirm('If you delete this account, posts will also be deleted. If you still want to delete click ok ');">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                        <form method="post"
+                                                                              action="admin/manage-user/ban/{{$u->id}}">
+                                                                            @csrf
+                                                                            @if($u->isBan==1)
+                                                                            <button type="submit"
+                                                                                    class="btn btn-info btn-circle"
+                                                                                    onclick="return confirm('Do you want to unban?')">
+                                                                                <i class="fas fa-check"></i>
+                                                                            </button>
+                                                                            @else
+                                                                                <button type="submit"
+                                                                                        class="btn btn-danger btn-circle"
+                                                                                        onclick="return confirm('Do you want to ban?')">
+                                                                                    <i class="fas fa-ban"></i>
+                                                                                </button>
+                                                                            @endif
+                                                                        </form>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

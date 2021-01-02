@@ -51,23 +51,17 @@ class UserController extends Controller{
     public function viewPost($id){
 
     }
-    /* public function getAddUser()
- {
-     return view('dashboard.pages.admin.user.add');
- }
- public function postAddUser(Request $request)
- {
-     $validator = $request->validate(['name' => 'required|min:2|max:250', 'password' => 'required|min:5|max:30'], ['name.required' => 'Do not leave it blank',
-         'name.min' => 'Need to enter 2 or more characters', 'name.max' => 'The number of characters exceeds the limit', 'password.required' => 'Do not leave it blank',
-         'password.min' => 'Need to enter 5 or more characters', 'password.max' => 'The number of characters exceeds the limit']);
-     $user = new User;
-     $user->name=$request->name;
-     $user->email=$request->email;
-     $user->gender=$request->gender;
-     $user->level=$request->level;
-     $user->password=Hash::make($request->password);
-     $user->save();
-     session()->flash('success', 'Created successfully');
-     return view('dashboard.pages.admin.user.add');
- }*/
+    public function banUser($id){
+        $user=User::find($id);
+        if($user->isBan==0){
+           $user->isBan=1;
+           $user->save();
+           return redirect('admin/manage-user/view');
+        }
+        else{
+            $user->isBan=0;
+            $user->save();
+            return redirect('admin/manage-user/view');
+        }
+    }
 }

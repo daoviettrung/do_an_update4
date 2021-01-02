@@ -21,7 +21,7 @@ class ReportController extends Controller{
             $i+=1;
         }
         $id_cmt_cut=implode("_",$id_cmt_cut);
-        var_dump($id_cmt_cut);
+        $id_post=explode("_",$id);
     }
     public function getMonth(Request $request){
         $report=Report::select('tbl_report.*')

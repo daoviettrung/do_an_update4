@@ -82,11 +82,7 @@ class TopicController extends Controller{
     public function delete($id){
         $id_cate=[];
         $i=0;
-        $idT=DB::table('tbl_topic')->where('id',$id)->get();
-        foreach ($idT as $t){
-            $t=$t;
-        }
-        $topic = Topic::find($t->id);
+        $topic = Topic::find($id);
         $category=DB::table('tbl_category')->where('topic_id',$topic->id)->get();
         foreach ($category as $ct){
             $id_cate[$i]=$ct->id;
@@ -114,16 +110,10 @@ class TopicController extends Controller{
         return view('dashboard.pages.admin.topic.edit',['topic'=>$t,'user'=>$user]);
     }
     public function postEdit(Request $request,$id){
-        $idT=DB::table('tbl_topic')->where('id',$id)->get();
-        foreach ($idT as $t){
-            $t=$t;
-        }
         $mod=DB::table('users')->where('name',$request->mod_id)->get();
         foreach ($mod as $m){
             $m=$m;
         }
-        $name=$request->name;
-        $name= explode(" ",$name);
         $topic=Topic::find($id);
         $topic->name=$request->name;
         $topic->slug=$request->slug;

@@ -22,26 +22,12 @@ class RedirectController extends Controller
         return redirect('/login');
     }
 
-    public function getAdminDashboard($id=null)
+    public function getAdminDashboard()
     {
-        if($id==null){
-            $count_all_post = Post::where('author_id', '=', Auth::id())
-                    ->where('status', '!=', 'comment')
-                    ->count() ?? 0;
-            return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post]);
-        }
-        else{
-            $user= DB::table('users')->where('id', $id)
-                ->get();
-            foreach ($user as $u){
-                $u=$u;
-            }
-            $count_all_post = Post::where('author_id', '=', $u->id)
-                    ->where('status', '!=', 'comment')
-                    ->count() ?? 0;
-            return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post,'user'=>$u]);
-
-        }
+        $count_all_post = Post::where('author_id', '=', Auth::id())
+                ->where('status', '!=', 'comment')
+                ->count() ?? 0;
+        return view ('dashboard.pages.admin.dashboard',['count_all_post'=>$count_all_post]);
 
     }
 }

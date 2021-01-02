@@ -30,7 +30,6 @@ class CategoryController extends Controller
         $validator= $request->validate(['name'=>'required|min:2|max:250'],['name.required'=>'Do not leave it blank',
             'name.min'=>'Need to enter 2 or more characters','name.max'=>'The number of characters exceeds the limit']);
         $cate = new Category;
-        $cate1 = Category::all();
         $nameCut = [];
         $i = 0;
         $count = DB::table('tbl_category')->count();
@@ -77,11 +76,7 @@ class CategoryController extends Controller
         }
     }
     public function delete($id){
-        $idC=DB::table('tbl_category')->where('id',$id)->get();
-        foreach ($idC as $c){
-            $c=$c;
-        }
-        $cate = Category::find($c->id);
+        $cate = Category::find($id);
         $post=DB::table('tbl_post')->whereIn('category_id',$cate)->get();
         foreach ($post as $p){
             $p_delete=Post::find($p->id);
@@ -99,17 +94,11 @@ class CategoryController extends Controller
         return view('dashboard.pages.admin.category.edit',['cate'=>$c,'topic'=>$topic]);
     }
     public function postEdit(Request $request,$id){
-        $idC=DB::table('tbl_category')->where('id',$id)->get();
-        foreach ($idC as $c){
-            $c=$c;
-        }
         $topic=DB::table('tbl_topic')->where('name',$request->topic_id)->get();
         foreach ($topic as $t){
             $t=$t;
         }
-        $name=$request->name;
-        $name= explode(" ",$name);
-        $cate=Category::find($c->id);
+        $cate=Category::find($id);
         $cate->name=$request->name;
         $cate->slug=$request->slug;
         $cate->topic_id=$t->id;
