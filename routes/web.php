@@ -34,7 +34,7 @@ use App\Http\Controllers\Admin\AccountControllers;
 //=========================Trung==================================
 
 Route::prefix('admin')->group(function(){
-    Route::get('dashboard',[RedirectController::class,'getAdminDashboard']);
+    Route::get('dashboard/{id?}',[RedirectController::class,'getAdminDashboard']);
     Route::prefix('manage-post')->group(function (){
         Route::get('get-category/{topic_id}',[PostController::class,'getCategory']);
         Route::get('list/my-post', [PostController::class, 'getMyPost']);
