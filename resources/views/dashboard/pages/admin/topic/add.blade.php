@@ -15,6 +15,7 @@
 
     <!-- Custom Fonts -->
     <link href="assets_dashboard/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets_dashboard/css/free.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,13 +38,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1  class="page-header">Add topic</h1>
+                    <h1  class="page-header"> Add topic</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div style="width: 800px;" class="col-lg-12">
+                <div class="col-lg-8">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -59,9 +60,9 @@
                             {{ session()->get('success') }}
                         </div>
                     @endif
-                    <div style="margin-left: 20px ;width: 500px" class="panel panel-default">
+                    <div  class="panel panel-default">
                         <div class="panel-heading">
-                            Form Add Topic
+                        <i class="far fa-plus-square"></i>  Form Add Topic
                         </div>
                         <div class="panel-body">
                             <form role="form" method="post" action="admin/manage-topic/post-add">
@@ -96,7 +97,7 @@
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <button type="submit" class="btn btn-default">Add
+                                <button style="margin-left: 510px;border-width: 2px;background: #f5f5f5;" type="submit" class="btn btn-default">Add New
                                 </button>
 
                             </form>
@@ -106,7 +107,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <div style="width: 300px; margin-left: 100px" class="col-lg-4">
+                <div  class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-twitter fa-fw"></i>Information admin
@@ -114,16 +115,16 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
+                                <a  class="list-group-item">
                                     <i></i> Name :{{Auth::user()->name}}
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a  class="list-group-item">
                                     <i></i> Email:{{Auth::user()->email}}
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a  class="list-group-item">
                                     <i></i> Gender:{{Auth::user()->gender}}
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a  class="list-group-item">
                                     <i></i> Birthday:{{Auth::user()->birthday}}
                                 </a>
                             </div>

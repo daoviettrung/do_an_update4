@@ -51,17 +51,10 @@ class UserController extends Controller{
     public function viewPost($id){
 
     }
-    public function banUser($id){
-        $user=User::find($id);
-        if($user->isBan==0){
-           $user->isBan=1;
-           $user->save();
-           return redirect('admin/manage-user/view');
-        }
-        else{
-            $user->isBan=0;
-            $user->save();
-            return redirect('admin/manage-user/view');
-        }
+    public function banUser($id, Request $request){
+        $user= User::find($id);
+        $user->isBan=$request->datepicker;
+        $user->save();
+        return redirect('admin/manage-user/view');
     }
 }

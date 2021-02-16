@@ -16,16 +16,16 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Manage Post<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="mod/HomeMod/{{$accountLogin->id}}">Approve post</a>
+                        <a href="">Approve post</a>
                     </li>
                     <li>
-                        <a href="mod/listpostmod/{{$accountLogin->id}}">List post</a>
+                        <a> ">List post</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="member/notice/list"><i class="fa fa-bell-o fa-fw"></i> Notice</a>
+                <a >"><i class="fa fa-bell-o fa-fw"></i> Notice</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i> Account Settings<span class="fa arrow"></span></a>

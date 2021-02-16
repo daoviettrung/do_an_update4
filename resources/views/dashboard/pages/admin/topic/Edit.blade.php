@@ -90,7 +90,7 @@
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <button type="submit" class="btn btn-default">Update
+                                <button style="margin-left: 510px;border-width: 2px;background: #f5f5f5;" type="submit" class="btn btn-default">Update
                                 </button>
 
                             </form>

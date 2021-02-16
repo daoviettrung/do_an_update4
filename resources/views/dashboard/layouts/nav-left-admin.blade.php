@@ -13,10 +13,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="admin/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="admin/dashboard"><i class="fa fa-fw" aria-hidden="true" title="Copy to use home">&#xf015</i> Dashboard</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Manage post</a>
+                <a href="#"> <i class="fa fa-fw" aria-hidden="true" title="Copy to use paper-plane-o">&#xf1d9</i> Manage post</a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/manage-post/list/my-post">View post</a>
@@ -27,7 +27,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Manage Topic<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-fw" aria-hidden="true" title="Copy to use th-large">&#xf009</i> Manage Topic<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/manage-topic/view">View Topic</a>
@@ -39,7 +39,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Manage Category<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-fw" aria-hidden="true" title="Copy to use life-saver">&#xf1cd</i> Manage Category<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/manage-category/view">View Category</a>
@@ -51,7 +51,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Manage User<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-fw" aria-hidden="true" title="Copy to use user-md">&#xf0f0</i> Manage User<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/manage-user/view">View user</a>
@@ -60,7 +60,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Manage Report<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-fw" aria-hidden="true" title="Copy to use flag-o">&#xf11d</i> Manage Report<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="admin/manage-report/view">View report</a>

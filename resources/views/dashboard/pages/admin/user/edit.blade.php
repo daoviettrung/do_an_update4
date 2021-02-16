@@ -44,7 +44,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div style="width: 800px" class="col-lg-12">
+                <div style="margin-left: 100px"  class="col-lg-6">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -98,7 +98,7 @@
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <button type="submit" class="btn btn-default">Update
+                                <button style="margin-left: 300px;border-width: 2px;background: #f5f5f5;" type="submit" class="btn btn-default">Update
                                 </button>
 
                             </form>

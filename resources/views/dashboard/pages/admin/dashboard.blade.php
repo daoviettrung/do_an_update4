@@ -223,7 +223,7 @@
         </div>
     </div>
     @else
-        <div class="page-content page-container" id="page-content">
+    <div style="margin-left: 100px; margin-top:50px" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
                 <div class="col-xl-6 col-md-8">

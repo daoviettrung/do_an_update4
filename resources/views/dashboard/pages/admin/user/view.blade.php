@@ -3,6 +3,7 @@
 @section('title', 'List Post')
 
 @section('style')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap Core CSS -->
     <link href="assets_dashboard/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,6 +21,19 @@
 
     <!-- Custom Fonts -->
     <link href="assets_dashboard/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- day la jquery calendar-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+        import Button from "@/Jetstream/Button";
+
+        export default {
+            components: {Button}
+        }
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"/>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -115,23 +129,14 @@
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                        <form method="post"
-                                                                              action="admin/manage-user/ban/{{$u->id}}">
-                                                                            @csrf
-                                                                            @if($u->isBan==1)
-                                                                            <button type="submit"
-                                                                                    class="btn btn-info btn-circle"
-                                                                                    onclick="return confirm('Do you want to unban?')">
-                                                                                <i class="fas fa-check"></i>
-                                                                            </button>
-                                                                            @else
-                                                                                <button type="submit"
-                                                                                        class="btn btn-danger btn-circle"
-                                                                                        onclick="return confirm('Do you want to ban?')">
-                                                                                    <i class="fas fa-ban"></i>
-                                                                                </button>
-                                                                            @endif
-                                                                        </form>
+
+                                                                        <div id="button-wrapper">
+                                                                           <?php $idUser=$u->id?>
+                                                                            <button id="button"
+                                                                                    class="btn btn-danger btn-circle">
+                                                                                <i class="fas fa-ban"></i></button>
+                                                                        </div>
+
                                                                 @endif
                                                             </td>
                                                         </tr>
@@ -174,13 +179,25 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="assets_dashboard/js/startmin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function () {
             $('#dataTables-example').DataTable({
                 responsive: true,
-                order: [[4, "desc"]]
+                order: [
+                    [4, "desc"]
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#button-wrapper button").click(function () {
+
+                $("#button-wrapper").html('<form method="post" action="admin/manage-user/ban/{{$idUser}}"> @csrf<input type="text" id="datepicker" name="datepicker"><button type="submit">Submit</button></form>');
+                $("#datepicker").datepicker();
             });
         });
     </script>

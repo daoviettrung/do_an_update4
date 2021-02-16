@@ -13,6 +13,11 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if(session()->has('ban'))
+            <div class="alert alert-success">
+                {{ session()->get('ban') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

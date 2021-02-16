@@ -72,7 +72,7 @@ Route::prefix('admin')->group(function(){
         Route::post('post-edit/{idU}',[UserController::class,'postEdit']);
         Route::post('delete/{idU}',[UserController::class,'delete']);
         Route::get('view-post/{id}',[UserController::class,'viewPost']);
-        Route::post('ban/{id}',[UserController::class,'banUser']);
+        Route::post('ban/{idUser}',[UserController::class,'banUser']);
     });
     Route::prefix('manage-report')->group(function(){
         Route::get('view',[ReportController::class,'viewReport']);
