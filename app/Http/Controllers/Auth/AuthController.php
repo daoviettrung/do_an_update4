@@ -16,7 +16,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $auth=User::find(Auth::user()->id);
-            if($auth->isBan==0){
+            if($auth->isBan==NULL){
                 return redirect('admin/dashboard');
             }
             $auth=explode("/",$auth->isBan);

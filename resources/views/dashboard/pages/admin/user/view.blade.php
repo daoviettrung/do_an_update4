@@ -24,13 +24,6 @@
     <!-- day la jquery calendar-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <script>
-        import Button from "@/Jetstream/Button";
-
-        export default {
-            components: {Button}
-        }
-    </script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"/>
 
@@ -129,13 +122,25 @@
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-
-                                                                        <div id="button-wrapper">
-                                                                           <?php $idUser=$u->id?>
-                                                                            <button id="button"
-                                                                                    class="btn btn-danger btn-circle">
-                                                                                <i class="fas fa-ban"></i></button>
+<!--                                                                       Day la form button  -->
+                                                                    <div id="button-wrapper{{$u->id}}" class="button-ban">
+                                                                        <button id="{{$u->id}}"
+                                                                                class="btn btn-danger btn-circle"
+                                                                                onclick="getBan(this.id)">
+                                                                            <i class="fas fa-ban"></i>
+                                                                        </button>
+<!--                                                                      Day la form input  -->
+                                                                        <div id="input{{$u->id}}" hidden class="input-ban">
+                                                                            <form method="post"
+                                                                                  action="admin/manage-user/ban/{{$u->id}}">
+                                                                                @csrf
+                                                                                <input type="focus "  id="datepicker{{$u->id}}"
+                                                                                   name="datepicker" onclick="inputBan()">
+                                                                                <button class="btn btn-danger"style="height: 30px" type="submit">Ban</button>
+                                                                            </form>
                                                                         </div>
+
+                                                                    </div>
 
                                                                 @endif
                                                             </td>
@@ -193,12 +198,22 @@
         });
     </script>
     <script>
-        $(function () {
-            $("#button-wrapper button").click(function () {
+        function getBan(id) {
+            document.getElementById(id).setAttribute('style', 'display:none');
+            document.getElementById("input"+id).setAttribute('style', 'display:inline');
+            var className = document.getElementsByClassName("input-ban");
 
-                $("#button-wrapper").html('<form method="post" action="admin/manage-user/ban/{{$idUser}}"> @csrf<input type="text" id="datepicker" name="datepicker"><button type="submit">Submit</button></form>');
-                $("#datepicker").datepicker();
+            Array.prototype.forEach.call(className, function(cl) {
+                // Do stuff here
+                if(cl.id!= "input"+id){
+                    document.getElementById(cl.id).setAttribute('style', 'display:none');
+                    document.getElementById(id).setAttribute('style', 'display:inline');
+                }
             });
-        });
+        }
+        function inputBan (){
+            //document.getElementById(id).datepicker();
+            $('input[id^=datepicker]').datepicker();
+        }
     </script>
 @endsection

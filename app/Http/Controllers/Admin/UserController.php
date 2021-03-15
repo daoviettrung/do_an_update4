@@ -48,9 +48,6 @@ class UserController extends Controller{
         $user->delete();
         return redirect('admin/manage-user/view');
     }
-    public function viewPost($id){
-
-    }
     public function banUser($id, Request $request){
         $user= User::find($id);
         $user->isBan=$request->datepicker;
