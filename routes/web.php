@@ -44,7 +44,7 @@ Route::prefix('admin')->group(function(){
         Route::post('/add', [PostController::class, 'postAddPost']);
         Route::get('/edit/{id}', [PostController::class, 'getEditPost']);
         Route::post('/edit', [PostController::class, 'postEditPost']);
-        Route::post('/delete', [PostController::class, 'postDeletePost']);
+        Route::post('/delete/{idPost}', [PostController::class, 'postDeletePost']);
         //Route::get('ListPost',[PostController::class,'showPost']);
         // Route::get('ViewPost/{id}',[PostController::class,'viewPost']);
         // Route::post('filter',[PostController::class,'filter']);
@@ -76,8 +76,8 @@ Route::prefix('admin')->group(function(){
     });
     Route::prefix('manage-report')->group(function(){
         Route::get('view',[ReportController::class,'viewReport']);
-        Route::get('view-post/{id}',[ReportController::class,'viewPost']);
-        Route::post('month',[ReportController::class,'getMonth']);
+        Route::get('view-post/{idPost}',[ReportController::class,'viewPost']);
+        Route::post('filter',[ReportController::class,'getFilter']);
 
     });
     Route::prefix('/account')->group(function () {

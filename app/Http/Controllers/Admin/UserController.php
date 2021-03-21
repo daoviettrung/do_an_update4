@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
-use App\Models\Topic;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -48,10 +47,20 @@ class UserController extends Controller{
         $user->delete();
         return redirect('admin/manage-user/view');
     }
-    public function banUser($id, Request $request){
-        $user= User::find($id);
-        $user->isBan=$request->datepicker;
-        $user->save();
-        return redirect('admin/manage-user/view');
+    public function banUser( Request $request,$id){
+        if($request->datepicker==null){
+            $user= User::find($id);
+            $user->isBan=Carbon::now()->month.'/'.Carbon::now()->day.'/'.Carbon::now()->year;
+            $user->save();
+            return back()
+                ->with('status', 'Ban successfully!');
+        }
+        else{
+            $user= User::find($id);
+            $user->isBan=$request->datepicker;
+            $user->save();
+            return redirect('admin/manage-user/view');
+        }
+
     }
 }

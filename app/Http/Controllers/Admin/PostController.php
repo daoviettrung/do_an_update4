@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\Category;
@@ -229,11 +230,19 @@ class PostController extends Controller
         return back()->with('status', 'Edit successfully!');
     }
 
-    public function postDeletePost(Request $request)
+    public function postDeletePost($idPost)
     {
-        Post::where('id', 'like', $request->id . '%')
-            ->delete();
-        return back()
-            ->with('status', 'Deleted successfully!');
+       $post= Post::where('id','like',$idPost.'%')->get();
+        foreach ($post as $p){
+            $postDelete=Post::find($p->id);
+            $postDelete->delete();
+        }
+        $report= Report::where('post_id','like',$idPost.'%')->get();
+        foreach ($report as $r){
+            $reportDelete=Report::find($r->id);
+            $reportDelete->delete();
+        }
+        return redirect('admin/manage-report/view');
+
     }
 }
