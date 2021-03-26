@@ -81,8 +81,11 @@
                                                     <tbody id="post-i-manage">
                                                     @foreach($user as $u)
                                                         <tr>
-                                                            <td><a href="admin/dashboard/{{$u->id}}">{{$u->name}}</a>
-                                                            </td>
+                                                            @if($u->isBan!=null)
+                                                            <td><a class="text-danger" href="admin/dashboard/{{$u->id}}">{{$u->name}}</a></td>
+                                                            @else
+                                                                <td><a href="admin/dashboard/{{$u->id}}">{{$u->name}}</a></td>
+                                                            @endif
                                                             <td>{{$u->email}}</td>
                                                             <td>{{$u->gender}}</td>
                                                             @if($u->level==0)

@@ -208,13 +208,18 @@
                                             <p class="m-b-10 f-w-600">Total </p>
                                             <h6 class="text-muted f-w-400">{{$count_all_post}}</h6>
                                         </div>
+                                        @if($user->level!=2)
+                                            <div class="col-sm-6" >
+                                            <p class="m-b-10 f-w-600">Status </p>
+                                                @if($user->isBan!=null) <h6 class="text-muted f-w-400">Banned</h6>
+                                                @else<h6 class="text-muted f-w-400">Not banned</h6>
+                                                @endif
+                                        </div>
+                                        @endif
                                     </div>
-                                    <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -248,7 +253,7 @@
                                             <p class="m-b-10 f-w-600">Level:</p>
                                             <h6 class="text-muted f-w-400">@if(Auth::user()->level==2) Admin
                                             @elseif(Auth::user()->level==1)
-                                            Mod 
+                                            Mod
                                             @else User @endif
                                             </h6>
                                         </div>

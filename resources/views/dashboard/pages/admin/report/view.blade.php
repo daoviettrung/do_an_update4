@@ -187,7 +187,11 @@
                                                     <tbody>
                                                     @foreach($report as $r)
                                                         <tr>
-                                                            <td>{{$r->post->title}}</td>
+                                                            <?php
+                                                            $post=explode("_",$r->post_id);
+                                                            $post=$post[0];
+                                                            $postTitle=\App\Models\Post::find($post);?>
+                                                            <td>{{$postTitle->title}}</td>
                                                             <td>{{$r->user->name}}</td>
                                                             <td>{{$r->content}}</td>
                                                             <td>

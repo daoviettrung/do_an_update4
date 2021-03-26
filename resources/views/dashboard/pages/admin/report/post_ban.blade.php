@@ -164,16 +164,16 @@
                                     <!--
                                                                                               Day là cho gan cờ      -->
                                     @if($comment->id==$idTick)
-                                    <form method="post"
+                                    <form  method="post"
                                           action="admin/manage-user/ban/{{$comment->author->id}}">
                                         @csrf
-                                        <button type="submit">Ban user</button>
+                                        <button style="width: 55px " type="submit">Ban </button>
                                     </form>
-                                    <form method="post"
+                                    <form style="margin-top: 5px" method="post"
                                           action="admin/manage-post/delete/{{$comment->id}}">
                                         @csrf
                                         <button onclick="return confirm('Do you really want to delete the comment, press ok ' +
-                             ' to confirm?')" ;>Delete cmt
+                             ' to confirm?')" ;>Delete
                                         </button>
                                     </form>
                                 @endif
